@@ -1,0 +1,237 @@
+<div
+  class="container"
+  id="container"
+  [ngClass]="{ 'sign-up-mode': activeClass }"
+>
+  <!--form container -->
+
+  <div class="forms-container">
+    <div class="signin-signup">
+      <!--sign in form and validation -->
+      <form #login="ngForm" class="sign-in-form">
+        <h2 class="title">Sign in</h2>
+
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+
+          <input
+            class="form-control"
+            placeholder="Email"
+            type="email"
+            name="useremail"
+            required
+            #useremail="ngModel"
+            [(ngModel)]="loginRequest.useremail"
+            [email]="true"
+          />
+        </div>
+        <div
+          *ngIf="useremail.invalid && (useremail.dirty || useremail.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="useremail.errors.required">Email is required.</div>
+          <div *ngIf="useremail.errors.email">Email is not valid.</div>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input
+            class="form-control"
+            placeholder="Password"
+            type="password"
+            name="pass"
+            required
+            #pass="ngModel"
+            [(ngModel)]="loginRequest.pass"
+          />
+        </div>
+        <div
+          *ngIf="pass.invalid && (pass.dirty || pass.touched)"
+          class="alert text-danger animated shake"
+        >
+          <div *ngIf="pass.errors.required">
+            You have to enter the password 😉
+          </div>
+        </div>
+        <input
+          type="submit"
+          value="Login"
+          [disabled]="login.invalid"
+          type="button"
+          (click)="onlogin()"
+          class="btn btn-primary my-4"
+          class="btn solid"
+        />
+        <p class="text-center text-danger pt-3" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </p>
+      </form>
+      <!--sign up form and validation -->
+      <form #SignUp="ngForm" class="sign-up-form">
+        <h2 class="title">Sign up</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input
+            class="form-control"
+            [disabled]="showValidText"
+            placeholder="username"
+            type="text"
+            name="username"
+            required
+            minlength="3"
+            #username="ngModel"
+            [(ngModel)]="signupRequest.username"
+          />
+        </div>
+        <div
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          class="alert text-danger animated fadeInDown"
+        >
+          <div *ngIf="username.errors.required">Username is Requierd.</div>
+          <div *ngIf="username.errors.minlength">
+            Username must be at least 3 characters long.
+          </div>
+        </div>
+
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input
+            class="form-control"
+            [disabled]="showValidText"
+            placeholder="Email"
+            type="email"
+            name="useremail"
+            required
+            #useremail="ngModel"
+            [(ngModel)]="signupRequest.useremail"
+            [email]="true"
+          />
+        </div>
+        <div
+          *ngIf="useremail.invalid && (useremail.dirty || useremail.touched)"
+          class="alert text-danger animated fadeInDown"
+        >
+          <div *ngIf="useremail.errors.required">Email is required.</div>
+          <div *ngIf="useremail.errors.email">Email is not valid.</div>
+        </div>
+        <div class="input-field">
+          <i class="ni ni-badge"></i>
+          <input
+            class="form-control"
+            [disabled]="showValidText"
+            placeholder="Role"
+            type="text"
+            name="role"
+            required
+            #role="ngModel"
+            [(ngModel)]="signupRequest.role"
+          />
+        </div>
+        <div
+          *ngIf="role.invalid && (role.dirty || role.touched)"
+          class="alert text-danger animated fadeInDown"
+        >
+          <div *ngIf="role.errors.required">Role is Requierd.</div>
+        </div>
+
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input
+            class="form-control"
+            placeholder="Password"
+            [disabled]="showValidText"
+            type="password"
+            name="pass"
+            required
+            minlength="6"
+            #pass="ngModel"
+            [(ngModel)]="signupRequest.pass"
+          />
+        </div>
+        <div
+          *ngIf="pass.invalid && (pass.dirty || pass.touched)"
+          class="alert text-danger animated shake"
+        >
+          <div *ngIf="pass.errors.required">
+            You have to enter the password 😉
+          </div>
+        </div>
+
+        <div class="row my-4" *ngIf="showValidText">
+          <label>Check Your Mail Please</label>
+          <div class="col-4">
+            <div class="input-group input-group-alternative animated zoomIn">
+              <div class="input-group-prepend">
+                <span class="input-group-text"
+                  ><i class="ni ni-check-bold"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Enter your code"
+                type="text"
+                name="validationCode"
+                [(ngModel)]="code"
+              />
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="button" (click)="onVerify()" class="btn btn-success">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+        <div class="text-center animated zoomIn" *ngIf="!showValidText">
+          <input
+            type="submit"
+            [disabled]="SignUp.invalid"
+            type="button"
+            (click)="onSignUp()"
+            value="sign up"
+            class="btn solid"
+          />
+        </div>
+        <p class="text-center text-danger pt-3" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </p>
+      </form>
+    </div>
+    <!--animation panels-->
+    <div class="panel-container">
+      <!--left panel to sign up form-->
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>New here ?</h3>
+          <p>
+            Ebda2ha for any startup that has to grow itself,Let's Get up and
+            start it up together!
+          </p>
+          <button
+            class="btn transparent"
+            id="sign-up-btn"
+            (click)="toggleClass()"
+          >
+            Sign up
+          </button>
+        </div>
+
+        <img src="../../../assets/img/login.svg" class="image" alt="img-1" />
+      </div>
+      <!--right panel to sign in form-->
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>One of us ?</h3>
+          <p>Let's go on y a7la client f eldonia let's make agmad sho5l :"D</p>
+          <button
+            class="btn transparent"
+            id="sign-in-btn"
+            (click)="toggleClass()"
+          >
+            Sign in
+          </button>
+        </div>
+
+        <img src="../../../assets/img/register.svg" class="image" alt="img-2" />
+      </div>
+    </div>
+  </div>
+</div>
