@@ -1,23 +1,26 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-
+import { CountUpModule } from 'countup.js-angular2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app.routing';
+import { routing } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './pages/home/home.component';
+import { BrowserModule } from '@angular/platform-browser';
 
-
+import { ErrorInterceptor } from '../app/_helpers/error.Interceptor';
+import { JwtInterceptor } from '../app/_helpers/jwt.interceptor';
+import { HomeComponent } from '../app/pages/home/home.component';
+import { DashboardComponent } from '../app/pages/dashboard/dashboard.component';
+import { UserProfileComponent } from '../app/pages/user-profile/user-profile.component';
+import { JoinUsComponent } from '../app/pages/joinUs/joinUs.component';
+import { AlertComponent } from './alert/alert.component';
+import { CountToModule } from 'angular-count-to';
 
 @NgModule({
   imports: [
@@ -27,19 +30,25 @@ import { HomeComponent } from './pages/home/home.component';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule,
+    routing,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    BrowserModule,
+    CountUpModule
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-    AuthLayoutComponent,
     AboutUsComponent,
-    HomeComponent
-  ],
-  providers: [],
+    HomeComponent,
+    JoinUsComponent,
+    DashboardComponent,
+    AlertComponent,
+    UserProfileComponent
+  ], providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,56 +1,45 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { SignupRequest } from '../models/SignupRequest';
-import { LoginRequest } from '../models/LoginRequest';
-import { AuthResult } from '../models/models';
+import { Observable,BehaviorSubject } from "rxjs";
+import { map } from 'rxjs/operators';
+
+import { User } from '../models/User';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   SERVER_URL = "http://localhost:3000";
-  token: any
-  tokenObserver: any = new Observable(sub => {
-    sub.next()
-  })
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    this.accessToken = localStorage.getItem("accessToken");
+      this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+      this.currentUser = this.currentUserSubject.asObservable();
   }
 
-
-  //sign up API
-  sigup(request: SignupRequest): Observable<any> {
-    return this.http.post<any>(this.SERVER_URL + "/users/register", request);
-  }
-  //login API
-  login(request: LoginRequest): Observable<AuthResult> {
-    return this.http.post<AuthResult>(this.SERVER_URL + "/auth/joinUs", request);
+  public get currentUserValue(): User {
+      return this.currentUserSubject.value;
   }
 
+  login(email: string, Password: string) {
+      return this.http.post<any>(this.SERVER_URL + "/auth/joinUs", { email, Password })
+          .pipe(map(user => {
+              // login successful if there's a jwt token in the response
+              if (user && user.token) {
+                  // store user details and jwt token in local storage to keep user logged in between page refreshes
+                  localStorage.setItem('currentUser', JSON.stringify(user));
+                  this.currentUserSubject.next(user);
+              }
 
-  //Verify
-  verify(code: number, useremail: string): Observable<any> {
-    return this.http.post<any>(this.SERVER_URL + "/auth/validate", {
-      code,
-      useremail
-    });
+              return user;
+          }));
   }
 
-
-
-
-  loggedIn() {
-    return !!localStorage.getItem("accessToken");
+  logout() {
+      // remove user from local storage to log user out
+      localStorage.removeItem('currentUser');
+      this.currentUserSubject.next(null);
   }
-
-  getToken() {
-    return localStorage.getItem("accessToken");
-  }
-
-  accessToken: string;
-  username: string;
-  tokenForm = "x-auth-token ";
 }
 

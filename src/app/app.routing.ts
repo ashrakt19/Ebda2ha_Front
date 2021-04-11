@@ -1,51 +1,39 @@
-import { NgModule } from '@angular/core';
-import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from '../app/pages/home/home.component';
+import { JoinUsComponent } from '../app/pages/joinUs/joinUs.component';
+import { DashboardComponent } from '../app/pages/dashboard/dashboard.component';
+import { AboutUsComponent } from '../app/pages/about-us/about-us.component';
+import { UserProfileComponent } from '../app/pages/user-profile/user-profile.component';
+import { Role } from '../app/models/role';
+import { AuthGuard } from '../app/guard/auth.guard';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-
-const routes: Routes =[
+const appRoutes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+      path: '',
+      component: HomeComponent,
   },
-  
-   {
-    path: '',
-    component: AdminLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-      }
-    ]
-  }, {
-    path: '',
-    component: AuthLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
-      }
-    ]
-  }, {
-    path: '**',
-    redirectTo: 'home'
-  }
+  { 
+      path: 'dashboard', 
+      component: DashboardComponent, 
+      canActivate: [AuthGuard], 
+      data: { roles: [Role.Admin] } 
+  },
+  { 
+      path: 'joinUs', 
+      component: JoinUsComponent 
+  },
+  { 
+    path: 'aboutus', 
+    component: AboutUsComponent 
+},
+{ 
+    path: 'user-profile', 
+    component: UserProfileComponent,
+    canActivate: [AuthGuard]
+},
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' }
 ];
 
-@NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule.forRoot(routes,{
-      useHash: true
-    })
-  ],
-  exports: [
-  ],
-})
-export class AppRoutingModule { }
+export const routing = RouterModule.forRoot(appRoutes);

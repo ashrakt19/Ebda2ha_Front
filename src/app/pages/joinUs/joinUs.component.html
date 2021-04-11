@@ -8,191 +8,266 @@
   <div class="forms-container">
     <div class="signin-signup">
       <!--sign in form and validation -->
-      <form #login="ngForm" class="sign-in-form">
+
+      <form
+        [formGroup]="loginForm"
+        class="sign-in-form"
+        (ngSubmit)="onlogin()"
+      >
         <h2 class="title">Sign in</h2>
-
-        <div class="input-field">
-          <i class="fas fa-envelope"></i>
-
-          <input
-            class="form-control"
-            placeholder="Email"
-            type="email"
-            name="useremail"
-            required
-            #useremail="ngModel"
-            [(ngModel)]="loginRequest.useremail"
-            [email]="true"
-          />
-        </div>
-        <div
-          *ngIf="useremail.invalid && (useremail.dirty || useremail.touched)"
-          class="text-danger"
-        >
-          <div *ngIf="useremail.errors.required">Email is required.</div>
-          <div *ngIf="useremail.errors.email">Email is not valid.</div>
-        </div>
-        <div class="input-field">
-          <i class="fas fa-lock"></i>
-          <input
-            class="form-control"
-            placeholder="Password"
-            type="password"
-            name="pass"
-            required
-            #pass="ngModel"
-            [(ngModel)]="loginRequest.pass"
-          />
-        </div>
-        <div
-          *ngIf="pass.invalid && (pass.dirty || pass.touched)"
-          class="alert text-danger animated shake"
-        >
-          <div *ngIf="pass.errors.required">
-            You have to enter the password 😉
-          </div>
-        </div>
-        <input
-          type="submit"
-          value="Login"
-          [disabled]="login.invalid"
-          type="button"
-          (click)="onlogin()"
-          class="btn btn-primary my-4"
-          class="btn solid"
-        />
-        <p class="text-center text-danger pt-3" *ngIf="errorMessage">
-          {{ errorMessage }}
-        </p>
-      </form>
-      <!--sign up form and validation -->
-      <form #SignUp="ngForm" class="sign-up-form">
-        <h2 class="title">Sign up</h2>
-        <div class="input-field">
-          <i class="fas fa-user"></i>
-          <input
-            class="form-control"
-            [disabled]="showValidText"
-            placeholder="username"
-            type="text"
-            name="username"
-            required
-            minlength="3"
-            #username="ngModel"
-            [(ngModel)]="signupRequest.username"
-          />
-        </div>
-        <div
-          *ngIf="username.invalid && (username.dirty || username.touched)"
-          class="alert text-danger animated fadeInDown"
-        >
-          <div *ngIf="username.errors.required">Username is Requierd.</div>
-          <div *ngIf="username.errors.minlength">
-            Username must be at least 3 characters long.
-          </div>
-        </div>
-
-        <div class="input-field">
-          <i class="fas fa-envelope"></i>
-          <input
-            class="form-control"
-            [disabled]="showValidText"
-            placeholder="Email"
-            type="email"
-            name="useremail"
-            required
-            #useremail="ngModel"
-            [(ngModel)]="signupRequest.useremail"
-            [email]="true"
-          />
-        </div>
-        <div
-          *ngIf="useremail.invalid && (useremail.dirty || useremail.touched)"
-          class="alert text-danger animated fadeInDown"
-        >
-          <div *ngIf="useremail.errors.required">Email is required.</div>
-          <div *ngIf="useremail.errors.email">Email is not valid.</div>
-        </div>
-        <div class="input-field">
-          <i class="ni ni-badge"></i>
-          <input
-            class="form-control"
-            [disabled]="showValidText"
-            placeholder="Role"
-            type="text"
-            name="role"
-            required
-            #role="ngModel"
-            [(ngModel)]="signupRequest.role"
-          />
-        </div>
-        <div
-          *ngIf="role.invalid && (role.dirty || role.touched)"
-          class="alert text-danger animated fadeInDown"
-        >
-          <div *ngIf="role.errors.required">Role is Requierd.</div>
-        </div>
-
-        <div class="input-field">
-          <i class="fas fa-lock"></i>
-          <input
-            class="form-control"
-            placeholder="Password"
-            [disabled]="showValidText"
-            type="password"
-            name="pass"
-            required
-            minlength="6"
-            #pass="ngModel"
-            [(ngModel)]="signupRequest.pass"
-          />
-        </div>
-        <div
-          *ngIf="pass.invalid && (pass.dirty || pass.touched)"
-          class="alert text-danger animated shake"
-        >
-          <div *ngIf="pass.errors.required">
-            You have to enter the password 😉
-          </div>
-        </div>
-
-        <div class="row my-4" *ngIf="showValidText">
-          <label>Check Your Mail Please</label>
-          <div class="col-4">
-            <div class="input-group input-group-alternative animated zoomIn">
-              <div class="input-group-prepend">
-                <span class="input-group-text"
-                  ><i class="ni ni-check-bold"></i>
-                </span>
-              </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label class="form-control-label">Email *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (f.email.touched || f.email.dirty) && !f.email.valid
+              }"
+            >
               <input
+                type="email"
+                id="input-email"
+                formControlName="email"
+                name="email"
                 class="form-control"
-                placeholder="Enter your code"
-                type="text"
-                name="validationCode"
-                [(ngModel)]="code"
+                placeholder="AwosomeUser@gmail.com"
+                [ngClass]="{
+                  'is-invalid':
+                    (f.email.touched || f.email.dirty) && !f.email.valid
+                }"
               />
             </div>
           </div>
-          <div class="text-center">
-            <button type="button" (click)="onVerify()" class="btn btn-success">
-              <i class="fas fa-paper-plane"></i>
-            </button>
+          <div class="col-md-12">
+            <label class="form-control-label">Password *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (f.Password.touched || f.Password.dirty) && !f.Password.valid
+              }"
+            >
+              <input
+                type="password"
+                id="input-password"
+                formControlName="Password"
+                name="Password"
+                class="form-control"
+                placeholder="Password"
+                [ngClass]="{
+                  'is-invalid':
+                    (f.Password.touched || f.Password.dirty) &&
+                    !f.Password.valid
+                }"
+              />
+            </div>
           </div>
         </div>
-        <div class="text-center animated zoomIn" *ngIf="!showValidText">
-          <input
-            type="submit"
-            [disabled]="SignUp.invalid"
-            type="button"
-            (click)="onSignUp()"
-            value="sign up"
-            class="btn solid"
-          />
+        <button
+          type="button"
+          class="btn btn-default"
+          [disabled]="!loginForm.valid"
+        >
+          Login
+        </button>
+      </form>
+      <form
+        [formGroup]="registerFrom"
+        class="sign-up-form"
+        (ngSubmit)="onSignUp()"
+      >
+        <h2 class="title">Sign in</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-control-label">First Name *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (myForm.firstname.touched || myForm.firstname.dirty) &&
+                  !myForm.firstname.valid
+              }"
+            >
+              <input
+                type="text"
+                id="input-firstname"
+                formControlName="firstname"
+                name="firstname"
+                class="form-control"
+                placeholder="Awosome"
+                [ngClass]="{
+                  'is-invalid':
+                    (myForm.firstname.touched || myForm.firstname.dirty) &&
+                    !myForm.firstname.valid
+                }"
+              />
+              
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-control-label">Last Name *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (myForm.lastname.touched || myForm.lastname.dirty) &&
+                  !myForm.lastname.valid
+              }"
+            >
+              <input
+                type="text"
+                id="input-lastname"
+                formControlName="lastname"
+                name="lastname"
+                class="form-control"
+                placeholder="User"
+                [ngClass]="{
+                  'is-invalid':
+                    (myForm.lastname.touched || myForm.lastname.dirty) &&
+                    !myForm.lastname.valid
+                }"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-control-label">Email *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (myForm.email.touched || myForm.email.dirty) &&
+                  !myForm.email.valid
+              }"
+            >
+              <input
+                type="email"
+                id="input-emaill"
+                formControlName="email"
+                name="email"
+                class="form-control"
+                placeholder="AwosomeUser@gmail.com"
+                [ngClass]="{
+                  'is-invalid':
+                    (myForm.email.touched || myForm.email.dirty) &&
+                    !myForm.email.valid
+                }"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-control-label">Role *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (myForm.Role.touched || myForm.Role.dirty) &&
+                  !myForm.Role.valid
+              }"
+            >
+              <input
+                type="text"
+                id="input-Role"
+                formControlName="Role"
+                name="Role"
+                class="form-control"
+                placeholder="Role"
+                [ngClass]="{
+                  'is-invalid':
+                    (myForm.Role.touched || myForm.Role.dirty) &&
+                    !myForm.Role.valid
+                }"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-control-label">Password *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (myForm.Password.touched || myForm.Password.dirty) &&
+                  !myForm.Password.valid
+              }"
+            >
+              <input
+                type="password"
+                id="input-Password"
+                formControlName="Password"
+                name="Password"
+                class="form-control"
+                placeholder="Password"
+                [ngClass]="{
+                  'is-invalid':
+                    (myForm.Password.touched || myForm.Password.dirty) &&
+                    !myForm.Password.valid
+                }"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-control-label">Confirm Password *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (myForm.confirmPassword.touched ||
+                    myForm.confirmPassword.dirty) &&
+                  !myForm.confirmPassword.valid
+              }"
+            >
+              <input
+                type="password"
+                id="input-confirmPassword"
+                formControlName="confirmPassword"
+                name="confirmPassword"
+                class="form-control"
+                placeholder="Confirm Password"
+                [ngClass]="{
+                  'is-invalid':
+                    (myForm.confirmPassword.touched ||
+                      myForm.confirmPassword.dirty) &&
+                    !myForm.confirmPassword.valid
+                }"
+              />
+            </div>
+          
+          </div>
+          <div class="col-md-6 ">
+            <label class="form-control-label">Terms and conditions *</label>
+            <div
+              class="form-group"
+              [ngClass]="{
+                'has-danger':
+                  (myForm.acceptTerms.touched ||
+                    myForm.acceptTerms.dirty) &&
+                  !myForm.acceptTerms.valid
+              }"
+            >
+              <input
+                type="checkbox"
+                id="input-acceptTerms"
+                formControlName="acceptTerms"
+                name="acceptTerms"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    (myForm.acceptTerms.touched ||
+                      myForm.acceptTerms.dirty) &&
+                    !myForm.acceptTerms.valid
+                }"
+              />
+            </div>
+          
+          </div>
         </div>
-        <p class="text-center text-danger pt-3" *ngIf="errorMessage">
-          {{ errorMessage }}
-        </p>
+        <button
+          type="button"
+          class="btn btn-default"
+          [disabled]="!registerFrom.valid"
+        >
+          Register
+        </button>
       </form>
     </div>
     <!--animation panels-->

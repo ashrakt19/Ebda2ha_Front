@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { SignupRequest } from 'src/app/models/SignupRequest';
-import { LoginRequest } from 'src/app/models/LoginRequest';
+import { AlertService } from '../../services/alert.service';
+import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { MustMatch } from '../../_helpers/Must Match';
 
 
 @Component({
@@ -13,70 +16,117 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 export class JoinUsComponent implements OnInit, OnDestroy {
   activeClass: boolean;
-  signupRequest: SignupRequest = {}
-  loginRequest: LoginRequest = {}
-  nonValidatedMessage: string
-  errorMessage: string
-  showValidText: boolean = false
-  code: number
-  constructor(
-
-    private route: ActivatedRoute,
-    private router: Router,
-    private auth: AuthService
-  ) {
-  }
-
-
-  ngOnInit() {
-  }
-  ngOnDestroy() {
-  }
-
+  registerFrom: FormGroup;
 
   //toggleclass for animation login & sign up
   toggleClass() {
     this.activeClass = !this.activeClass
   }
 
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  error = '';
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private auth: AuthService,
+    private userservice: UserService,
+    private alertService: AlertService
+  ) {
+    // redirect to home if already logged in
+    if (this.auth.currentUserValue) {
+      this.router.navigate(['/home']);
+    }
+  }
+  ngOnDestroy(): void {
+  }
+
+  ngOnInit() {
+
+    //login form
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required, Validators.minLength(6)]]
+    });
 
 
-  //login
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    
+
+    //register form
+    this.registerFrom = this.formBuilder.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      Role: ['', [Validators.required]],
+      acceptTerms: [false, Validators.requiredTrue],
+      Password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    }, {
+      validator: MustMatch('Password', 'confirmPassword')
+
+    });
+  }
+
+
+
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
+
+  get myForm() {
+    return this.registerFrom.controls;
+  }
+
   onlogin() {
-    this.auth.login(this.loginRequest).subscribe(res => {
-      localStorage.setItem("accessToken", res.accessToken);
-      if (res.accessToken) {
-        this.router.navigate(['/user-profile'])
-      }
-    }, err => {
-      this.nonValidatedMessage = err.error.msg
-    }, () => {
-      console.log('Logged Successuflly');
-    })
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.auth.login(this.f.email.value, this.f.Password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/user-profile']);
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
+    console.log(this.loginForm.value)
+    console.log("logged success")
   }
 
-  //signup
   onSignUp() {
-    this.auth.sigup(this.signupRequest).subscribe(res => {
-      if (res == true) this.showValidText = true
-      this.errorMessage = null
-    }, err => {
-      this.errorMessage = err.error
-    })
-  }
+    this.submitted = true;
 
-  //verfication
-  onVerify() {
-    console.log(this.code, this.signupRequest.useremail)
-    this.auth.verify(this.code, this.signupRequest.useremail).subscribe(res => {
-      localStorage.setItem("accessToken", res.accessToken)
-      let x = localStorage.getItem("accessToken");
-      if (x) this.router.navigate(['/user-profile']);
-    }, err => {
-      console.log(err)
-      this.errorMessage = err.error.msg
-      console.log(this.errorMessage)
-    })
+    // stop here if form is invalid
+    if (this.registerFrom.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.userservice.signup(this.registerFrom.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.alertService.success('Registration successful', true);
+          this.router.navigate(['/user-profile']);
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
+    console.log(this.registerFrom.value)
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerFrom.value, null, 4));
   }
 
 
