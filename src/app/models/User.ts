@@ -1,11 +1,11 @@
+import { Profile } from './profile';
 export class User {
-    id: number;
-    firstname: string;
-    lastname: string;
+    _id: number;
+    firstName: string;
+    lastName: string;
     email: string;
-    Password: string;
-    Role: string;
+    password: string;
+    role: string;
     token?: string;
-    acceptTerms: boolean;
-    confirmPassword: string;
+    profile?: Profile;
 }

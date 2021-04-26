@@ -6,6 +6,8 @@ import { AboutUsComponent } from '../app/pages/about-us/about-us.component';
 import { UserProfileComponent } from '../app/pages/user-profile/user-profile.component';
 import { Role } from '../app/models/role';
 import { AuthGuard } from '../app/guard/auth.guard';
+import { AllPostsComponent } from './pages/all-posts/all-posts.component';
+import { MyPostsComponent } from './pages/my-posts/my-posts.component';
 
 const appRoutes: Routes = [
   {
@@ -25,11 +27,18 @@ const appRoutes: Routes = [
   { 
     path: 'aboutus', 
     component: AboutUsComponent 
+},{
+path: 'all-posts', 
+component: AllPostsComponent 
+},{
+path: 'my-posts', 
+component: MyPostsComponent
+// canActivate: [AuthGuard]
 },
 { 
     path: 'user-profile', 
     component: UserProfileComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
 },
 
   // otherwise redirect to home

@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,8 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public isCollapsed = true;
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  constructor(location: Location,  private element: ElementRef, private router: Router,
+     public authservice: AuthService) {
     this.location = location;
   }
 
@@ -34,4 +36,8 @@ export class NavbarComponent implements OnInit {
     return 'home';
   }
 
+  onLogout(){
+    this.authservice.logout();
+    this.router.navigate(['/home']);
+  }
 }

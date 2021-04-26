@@ -1,312 +1,325 @@
-<div
-  class="container"
-  id="container"
-  [ngClass]="{ 'sign-up-mode': activeClass }"
->
-  <!--form container -->
+<app-navbar></app-navbar>
+<div class="bg-default">
+  <div
+    class="container"
+    id="container"
+    [ngClass]="{ 'sign-up-mode': activeClass }"
+  >
+    <!--form container -->
 
-  <div class="forms-container">
-    <div class="signin-signup">
-      <!--sign in form and validation -->
+    <div class="forms-container">
+      <div class="signin-signup">
+        <!--sign in form and validation -->
 
-      <form
-        [formGroup]="loginForm"
-        class="sign-in-form"
-        (ngSubmit)="onlogin()"
-      >
-        <h2 class="title">Sign in</h2>
-        <div class="row">
-          <div class="col-md-12">
-            <label class="form-control-label">Email *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (f.email.touched || f.email.dirty) && !f.email.valid
-              }"
-            >
-              <input
-                type="email"
-                id="input-email"
-                formControlName="email"
-                name="email"
-                class="form-control"
-                placeholder="AwosomeUser@gmail.com"
+        <form
+          [formGroup]="loginForm"
+          class="sign-in-form"
+          (ngSubmit)="onlogin()"
+        >
+          <h2 class="title">Sign in</h2>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="form-control-label">Email *</label>
+              <div
+                class="form-group"
                 [ngClass]="{
-                  'is-invalid':
+                  'has-danger':
                     (f.email.touched || f.email.dirty) && !f.email.valid
                 }"
-              />
+              >
+                <input
+                  type="email"
+                  id="input-email"
+                  formControlName="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="AwosomeUser@gmail.com"
+                  [ngClass]="{
+                    'is-invalid':
+                      (f.email.touched || f.email.dirty) && !f.email.valid
+                  }"
+                />
+              </div>
             </div>
-          </div>
-          <div class="col-md-12">
-            <label class="form-control-label">Password *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (f.Password.touched || f.Password.dirty) && !f.Password.valid
-              }"
-            >
-              <input
-                type="password"
-                id="input-password"
-                formControlName="Password"
-                name="Password"
-                class="form-control"
-                placeholder="Password"
+            <div class="col-md-12">
+              <label class="form-control-label">Password *</label>
+              <div
+                class="form-group"
                 [ngClass]="{
-                  'is-invalid':
-                    (f.Password.touched || f.Password.dirty) &&
-                    !f.Password.valid
+                  'has-danger':
+                    (f.password.touched || f.password.dirty) &&
+                    !f.password.valid
                 }"
-              />
+              >
+                <input
+                  type="password"
+                  id="input-password"
+                  formControlName="password"
+                  name="Password"
+                  class="form-control"
+                  placeholder="Password"
+                  [ngClass]="{
+                    'is-invalid':
+                      (f.password.touched || f.password.dirty) &&
+                      !f.password.valid
+                  }"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <button
-          type="button"
-          class="btn btn-default"
-          [disabled]="!loginForm.valid"
+          <button
+            type="submit"
+            class="btn transparent"
+            [disabled]="!loginForm.valid"
+          >
+            Login
+          </button>
+        </form>
+        <form
+          [formGroup]="registerFrom"
+          class="sign-up-form"
+          (ngSubmit)="onsignUp()"
         >
-          Login
-        </button>
-      </form>
-      <form
-        [formGroup]="registerFrom"
-        class="sign-up-form"
-        (ngSubmit)="onSignUp()"
-      >
-        <h2 class="title">Sign in</h2>
-        <div class="row">
-          <div class="col-md-6">
-            <label class="form-control-label">First Name *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (myForm.firstname.touched || myForm.firstname.dirty) &&
-                  !myForm.firstname.valid
-              }"
-            >
-              <input
-                type="text"
-                id="input-firstname"
-                formControlName="firstname"
-                name="firstname"
-                class="form-control"
-                placeholder="Awosome"
+          <h2 class="title">Sign Up</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-control-label">First Name *</label>
+              <div
+                class="form-group"
                 [ngClass]="{
-                  'is-invalid':
-                    (myForm.firstname.touched || myForm.firstname.dirty) &&
-                    !myForm.firstname.valid
+                  'has-danger':
+                    (myForm.firstName.touched || myForm.firstName.dirty) &&
+                    !myForm.firstName.valid
                 }"
-              />
-              
+              >
+                <input
+                  type="text"
+                  id="input-firstname"
+                  formControlName="firstName"
+                  name="firstname"
+                  class="form-control"
+                  placeholder="Awosome"
+                  [ngClass]="{
+                    'is-invalid':
+                      (myForm.firstName.touched || myForm.firstName.dirty) &&
+                      !myForm.firstName.valid
+                  }"
+                />
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <label class="form-control-label">Last Name *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (myForm.lastname.touched || myForm.lastname.dirty) &&
-                  !myForm.lastname.valid
-              }"
-            >
-              <input
-                type="text"
-                id="input-lastname"
-                formControlName="lastname"
-                name="lastname"
-                class="form-control"
-                placeholder="User"
+            <div class="col-md-6">
+              <label class="form-control-label">Last Name *</label>
+              <div
+                class="form-group"
                 [ngClass]="{
-                  'is-invalid':
-                    (myForm.lastname.touched || myForm.lastname.dirty) &&
-                    !myForm.lastname.valid
+                  'has-danger':
+                    (myForm.lastName.touched || myForm.lastName.dirty) &&
+                    !myForm.lastName.valid
                 }"
-              />
+              >
+                <input
+                  type="text"
+                  id="input-lastname"
+                  formControlName="lastName"
+                  name="lastname"
+                  class="form-control"
+                  placeholder="User"
+                  [ngClass]="{
+                    'is-invalid':
+                      (myForm.lastName.touched || myForm.lastName.dirty) &&
+                      !myForm.lastName.valid
+                  }"
+                />
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <label class="form-control-label">Email *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (myForm.email.touched || myForm.email.dirty) &&
-                  !myForm.email.valid
-              }"
-            >
-              <input
-                type="email"
-                id="input-emaill"
-                formControlName="email"
-                name="email"
-                class="form-control"
-                placeholder="AwosomeUser@gmail.com"
+            <div class="col-md-6">
+              <label class="form-control-label">Email *</label>
+              <div
+                class="form-group"
                 [ngClass]="{
-                  'is-invalid':
+                  'has-danger':
                     (myForm.email.touched || myForm.email.dirty) &&
                     !myForm.email.valid
                 }"
-              />
+              >
+                <input
+                  type="email"
+                  id="input-emaill"
+                  formControlName="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="AwosomeUser@gmail.com"
+                  [ngClass]="{
+                    'is-invalid':
+                      (myForm.email.touched || myForm.email.dirty) &&
+                      !myForm.email.valid
+                  }"
+                />
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <label class="form-control-label">Role *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (myForm.Role.touched || myForm.Role.dirty) &&
-                  !myForm.Role.valid
-              }"
-            >
-              <input
-                type="text"
-                id="input-Role"
-                formControlName="Role"
-                name="Role"
-                class="form-control"
-                placeholder="Role"
+            <div class="col-md-6">
+              <label class="form-control-label">Role *</label>
+              <div
+                class="form-group"
                 [ngClass]="{
-                  'is-invalid':
-                    (myForm.Role.touched || myForm.Role.dirty) &&
-                    !myForm.Role.valid
+                  'has-danger':
+                    (myForm.role.touched || myForm.role.dirty) &&
+                    !myForm.role.valid
                 }"
-              />
+              >
+                <input
+                  type="text"
+                  id="input-Role"
+                  formControlName="role"
+                  name="Role"
+                  class="form-control"
+                  placeholder="Role"
+                  [ngClass]="{
+                    'is-invalid':
+                      (myForm.role.touched || myForm.role.dirty) &&
+                      !myForm.role.valid
+                  }"
+                />
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <label class="form-control-label">Password *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (myForm.Password.touched || myForm.Password.dirty) &&
-                  !myForm.Password.valid
-              }"
-            >
-              <input
-                type="password"
-                id="input-Password"
-                formControlName="Password"
-                name="Password"
-                class="form-control"
-                placeholder="Password"
+            <div class="col-md-6">
+              <label class="form-control-label">Password *</label>
+              <div
+                class="form-group"
                 [ngClass]="{
-                  'is-invalid':
-                    (myForm.Password.touched || myForm.Password.dirty) &&
-                    !myForm.Password.valid
+                  'has-danger':
+                    (myForm.password.touched || myForm.password.dirty) &&
+                    !myForm.password.valid
                 }"
-              />
+              >
+                <input
+                  type="password"
+                  id="input-Password"
+                  formControlName="password"
+                  name="Password"
+                  class="form-control"
+                  placeholder="Password"
+                  [ngClass]="{
+                    'is-invalid':
+                      (myForm.password.touched || myForm.password.dirty) &&
+                      !myForm.password.valid
+                  }"
+                />
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <label class="form-control-label">Confirm Password *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (myForm.confirmPassword.touched ||
-                    myForm.confirmPassword.dirty) &&
-                  !myForm.confirmPassword.valid
-              }"
-            >
-              <input
-                type="password"
-                id="input-confirmPassword"
-                formControlName="confirmPassword"
-                name="confirmPassword"
-                class="form-control"
-                placeholder="Confirm Password"
+            <div class="col-md-6">
+              <label class="form-control-label">Confirm Password *</label>
+              <div
+                class="form-group"
                 [ngClass]="{
-                  'is-invalid':
-                    (myForm.confirmPassword.touched ||
-                      myForm.confirmPassword.dirty) &&
-                    !myForm.confirmPassword.valid
+                  'has-danger':
+                    (myForm.confirm.touched ||
+                      myForm.confirm.dirty) &&
+                    !myForm.confirm.valid
                 }"
-              />
+              >
+                <input
+                  type="password"
+                  id="input-confirmPassword"
+                  formControlName="confirm"
+                  name="confirmPassword"
+                  class="form-control"
+                  placeholder="Confirm Password"
+                  [ngClass]="{
+                    'is-invalid':
+                      (myForm.confirm.touched ||
+                        myForm.confirm.dirty) &&
+                      !myForm.confirm.valid
+                  }"
+                />
+              </div>
             </div>
-          
-          </div>
-          <div class="col-md-6 ">
-            <label class="form-control-label">Terms and conditions *</label>
-            <div
-              class="form-group"
-              [ngClass]="{
-                'has-danger':
-                  (myForm.acceptTerms.touched ||
-                    myForm.acceptTerms.dirty) &&
-                  !myForm.acceptTerms.valid
-              }"
-            >
-              <input
-                type="checkbox"
-                id="input-acceptTerms"
-                formControlName="acceptTerms"
-                name="acceptTerms"
-                class="form-control"
-                [ngClass]="{
-                  'is-invalid':
-                    (myForm.acceptTerms.touched ||
-                      myForm.acceptTerms.dirty) &&
-                    !myForm.acceptTerms.valid
-                }"
-              />
-            </div>
-          
-          </div>
         </div>
         <button
-          type="button"
-          class="btn btn-default"
-          [disabled]="!registerFrom.valid"
+        type="submit"
+        class="btn transparent"
+        [disabled]="!registerFrom.valid"
         >
-          Register
-        </button>
-      </form>
-    </div>
-    <!--animation panels-->
-    <div class="panel-container">
-      <!--left panel to sign up form-->
-      <div class="panel left-panel">
-        <div class="content">
-          <h3>New here ?</h3>
-          <p>
-            Ebda2ha for any startup that has to grow itself,Let's Get up and
-            start it up together!
-          </p>
-          <button
-            class="btn transparent"
-            id="sign-up-btn"
-            (click)="toggleClass()"
-          >
-            Sign up
-          </button>
+        Register
+      </button>
+      
+    </form>
+    <div class="row" *ngIf="showValidText && registerFrom.valid">
+      <div class="col-md-6" >
+        <label class="form-control-label">Please Check your mail and Enter your code</label>
+        <div
+          class="input-group input-group-alternative animated zoomIn"
+        >
+          <div class="input-group-prepend">
+            <span class="input-group-text"
+              ><i class="ni ni-check-bold"></i>
+            </span>
+          </div>
+          <input
+            class="form-control"
+            placeholder="Enter your code"
+            type="text"
+            name="validationCode"
+            [(ngModel)]="code"
+          />
         </div>
+          <button
+            type="button"
+            (click)="onVerify()"
+            class="btn btn-warning"
+          >
+            <i class="fas fa-paper-plane"></i>
+          </button>
 
-        <img src="../../../assets/img/login.svg" class="image" alt="img-1" />
       </div>
-      <!--right panel to sign in form-->
-      <div class="panel right-panel">
-        <div class="content">
-          <h3>One of us ?</h3>
-          <p>Let's go on y a7la client f eldonia let's make agmad sho5l :"D</p>
-          <button
-            class="btn transparent"
-            id="sign-in-btn"
-            (click)="toggleClass()"
-          >
-            Sign in
-          </button>
-        </div>
+    </div> 
+        
+      </div> 
+      <!--animation panels-->
+      <div class="panel-container">
+        <!--left panel to sign up form-->
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here ?</h3>
+            <p>
+              Ebda2ha for any startup that has to grow itself,Let's Get up and
+              start it up together!
+            </p>
+            <button
+              class="btn transparent"
+              id="sign-up-btn"
+              (click)="toggleClass()"
+            >
+              Sign up
+            </button>
+          </div>
 
-        <img src="../../../assets/img/register.svg" class="image" alt="img-2" />
+          <img src="../../../assets/img/login.svg" class="image" alt="img-1" />
+        </div>
+        <!--right panel to sign in form-->
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>One of us ?</h3>
+            <p>
+              Let's go on y a7la client f eldonia let's make agmad sho5l :"D
+            </p>
+            <button
+              class="btn transparent"
+              id="sign-in-btn"
+              (click)="toggleClass()"
+            >
+              Sign in
+            </button>
+          </div>
+
+          <img
+            src="../../../assets/img/register.svg"
+            class="image"
+            alt="img-2"
+          />
+        </div>
       </div>
     </div>
   </div>
 </div>
+<app-footer></app-footer>

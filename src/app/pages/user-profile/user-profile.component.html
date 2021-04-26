@@ -1,12 +1,19 @@
-<div class="header pb-8 pt-7 pt-lg-8 d-flex align-items-center">
+
+<app-sidebar></app-sidebar>
+<div class="main-content">
+  <!-- Top navbar -->
+  <app-navbar></app-navbar>
+  <!-- Pages -->
+  <div class="bg-default">
+<div class="header pb-7 pt-8 pt-lg-4 d-flex align-items-center">
     <!-- Mask -->
-    <span class="mask " style="background-color:#182f55 ;"></span>
+    <span class="mask bg-default"></span>
     <!-- Header container -->
     <div class="container-fluid d-flex align-items-center">
       <div class="row">
-        <div class="col-lg-7 col-md-10">
-          <h1 class="display-2 text-white">Hello Ashrakt</h1>
-          <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+        <div class="col-lg-12 col-md-10">
+          <h1 class="display-2 text-white">Hello Ashrakt,</h1>
+          <p class="text-light ">This is your profile page on EBDA2HA.</p>
         </div>
       </div>
     </div>
@@ -26,7 +33,7 @@
           </div>
           <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
             <div class="d-flex justify-content-between">
-              <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4">Connect</a>
+              <a href="javascript:void(0)" class="btn-primary btn-sm btn-info mr-4">Connect</a>
               <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a>
             </div>
           </div>
@@ -77,7 +84,7 @@
                 <h3 class="mb-0">My Account</h3>
               </div>
               <div class="col-4 text-right">
-                <a href="#!" class="btn btn-sm btn-primary">Edit Profile</a>
+                <a href="#!" class="btn btn-sm btn-default">Edit Profile</a>
               </div>
             </div>
           </div>
@@ -162,4 +169,6 @@
       </div>
     </div>
   </div>
-  
+</div>
+    <app-footer></app-footer>
+</div>

@@ -17,7 +17,8 @@ import { MustMatch } from '../../_helpers/Must Match';
 export class JoinUsComponent implements OnInit, OnDestroy {
   activeClass: boolean;
   registerFrom: FormGroup;
-
+  showValidText: boolean = false
+  code: number
   //toggleclass for animation login & sign up
   toggleClass() {
     this.activeClass = !this.activeClass
@@ -50,7 +51,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     //login form
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      Password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
 
@@ -60,15 +61,14 @@ export class JoinUsComponent implements OnInit, OnDestroy {
 
     //register form
     this.registerFrom = this.formBuilder.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      Role: ['', [Validators.required]],
-      acceptTerms: [false, Validators.requiredTrue],
-      Password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      role: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirm: ['', Validators.required]
     }, {
-      validator: MustMatch('Password', 'confirmPassword')
+      validator: MustMatch('password', 'confirm')
 
     });
   }
@@ -91,7 +91,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     }
 
     this.loading = true;
-    this.auth.login(this.f.email.value, this.f.Password.value)
+    this.auth.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
@@ -105,21 +105,21 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     console.log("logged success")
   }
 
-  onSignUp() {
+  onsignUp() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.registerFrom.invalid) {
       return;
     }
 
     this.loading = true;
-    this.userservice.signup(this.registerFrom.value)
+    this.userservice.SignUp(this.registerFrom.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Registration successful', true);
-          this.router.navigate(['/user-profile']);
+          this.registerFrom.valid
+          this.showValidText = true
+          
         },
         error => {
           this.alertService.error(error);
@@ -127,6 +127,15 @@ export class JoinUsComponent implements OnInit, OnDestroy {
         });
     console.log(this.registerFrom.value)
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerFrom.value, null, 4));
+  }
+  onVerify() {
+    console.log(this.code, this.registerFrom.value.email)
+    this.auth.verify(this.code, this.registerFrom.value.email).subscribe(res => {
+     this.router.navigate(['/user-profile']);
+    },  error => {
+        this.alertService.error(error);
+        this.loading = false;
+      });
   }
 
 

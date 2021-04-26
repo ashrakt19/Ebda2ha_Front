@@ -1,10 +1,13 @@
-<nav class="navbar navbar-vertical navbar-expand-md " style="background-color: #031f50;" id="sidenav-main">
+<nav class="navbar navbar-vertical navbar-expand-md bg-white" id="sidenav-main">
   <div class="container-fluid">
     <!-- Toggler -->
     <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed"
        aria-controls="sidenav-collapse-main">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <a class="navbar-brand pt-0" routerLinkActive="active" [routerLink]="['/home']">
+      <img src="../../../assets/img/brand/ebda2ha-logo-v2.png" class="navbar-brand-img" alt="...">
+    </a>
     <!-- User -->
     <ul class="nav align-items-center d-md-none">
       <li class="nav-item" ngbDropdown placement="bottom-right">
@@ -61,7 +64,7 @@
         <div class="row">
           <div class="col-6 collapse-brand">
             <a  routerLinkActive="active" [routerLink]="['/home']">
-              <img src="./assets/img/brand/ebda2ha-logo-v2.png">
+              <img src="../../../assets/img/brand/ebda2ha-logo-v2.png">
             </a>
           </div>
           <div class="col-6 collapse-close">

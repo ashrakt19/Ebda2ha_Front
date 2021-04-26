@@ -22,8 +22,8 @@ export class AuthService {
       return this.currentUserSubject.value;
   }
 
-  login(email: string, Password: string) {
-      return this.http.post<any>(this.SERVER_URL + "/auth/joinUs", { email, Password })
+  login(email: string, password: string) {
+      return this.http.post<any>(this.SERVER_URL + "/auth/joinUS", { email, password })
           .pipe(map(user => {
               // login successful if there's a jwt token in the response
               if (user && user.token) {
@@ -40,6 +40,13 @@ export class AuthService {
       // remove user from local storage to log user out
       localStorage.removeItem('currentUser');
       this.currentUserSubject.next(null);
+  }
+
+  verify(code: number, email: string) {
+    return this.http.post<any>(this.SERVER_URL + "/auth/validate", {
+      code,
+      email
+    });
   }
 }
 

@@ -1,0 +1,138 @@
+<div class="bg-default">
+  <section class="page-section">
+    <div class="container">
+      <div class="text-center">
+        <div class="row">
+          <div class="col-sm">
+            <p class="text-white text-left">
+              Welcome to all startups's posts, here you can find all categories of our all start-ups.
+            </p>
+          </div>
+          <div class="col-sm">
+            <div ngbDropdown class="d-inline-block">
+              <button
+              type="button"
+              id="dropdownBasic1"
+              class="btn transparent text-white"
+              ngbDropdownToggle
+            >
+            Category
+            </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>Food</button>
+                <button ngbDropdownItem>Furniture</button>
+                <button ngbDropdownItem>Startups</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <form class="navbar-search navbar-search-dark form-inline">
+              <div class="form-group" [ngClass]="{ focused: focus === true }">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="fas fa-search"></i
+                    ></span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Search"
+                    type="text"
+                    (focus)="focus = true"
+                    (blur)="focus = false"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card-group">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="../../../assets/aboutus.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+              <a class="btn text-center btn-warning text-white"
+                >See full post <i class="fas fa-eye"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card-group">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="../../../assets/aboutus.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+              <a class="btn text-center btn-warning text-white"
+                >See full post <i class="fas fa-eye"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card-group">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="../../../assets/aboutus.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+              <a class="btn text-center btn-warning text-white"
+                >See full post <i class="fas fa-eye"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card-group">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="../../../assets/aboutus.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+              <a class="btn text-center btn-warning text-white"
+                >See full post <i class="fas fa-eye"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
