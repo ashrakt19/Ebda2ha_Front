@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { AlertService } from '../../services/alert.service';
-import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -18,7 +16,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   activeClass: boolean;
   registerFrom: FormGroup;
   showValidText: boolean = false
-  code: number
+  code: String
   //toggleclass for animation login & sign up
   toggleClass() {
     this.activeClass = !this.activeClass
@@ -34,9 +32,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private auth: AuthService,
-    private userservice: UserService,
-    private alertService: AlertService
+    private auth: AuthService
   ) {
     // redirect to home if already logged in
     if (this.auth.currentUserValue) {
@@ -51,7 +47,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     //login form
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
 
 
@@ -65,7 +61,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       role: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       confirm: ['', Validators.required]
     }, {
       validator: MustMatch('password', 'confirm')
@@ -94,7 +90,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     this.auth.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        data => {
+        res => {
           this.router.navigate(['/user-profile']);
         },
         error => {
@@ -102,7 +98,6 @@ export class JoinUsComponent implements OnInit, OnDestroy {
           this.loading = false;
         });
     console.log(this.loginForm.value)
-    console.log("logged success")
   }
 
   onsignUp() {
@@ -113,30 +108,32 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     }
 
     this.loading = true;
-    this.userservice.SignUp(this.registerFrom.value)
+    this.auth.SignUp(this.registerFrom.value)
       .pipe(first())
       .subscribe(
-        data => {
-          this.registerFrom.valid
+        res => {
           this.showValidText = true
           
         },
         error => {
-          this.alertService.error(error);
-          this.loading = false;
+        console.log(error)
         });
     console.log(this.registerFrom.value)
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerFrom.value, null, 4));
+   
   }
   onVerify() {
-    console.log(this.code, this.registerFrom.value.email)
-    this.auth.verify(this.code, this.registerFrom.value.email).subscribe(res => {
+    this.auth.verifyEmail(this.code).subscribe(res => {
      this.router.navigate(['/user-profile']);
     },  error => {
-        this.alertService.error(error);
-        this.loading = false;
+       console.log(error)
       });
   }
-
+  onResetPassword(){
+    this.auth.getResetPass(this.f.email.value).subscribe(res=>{
+      console.log("sent mail to email user to reset pass")
+    },error => {
+      console.log("an error occur")
+    });
+  }
 
 }

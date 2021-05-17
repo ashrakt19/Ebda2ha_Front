@@ -11,6 +11,7 @@ var role_1 = require("../app/models/role");
 var auth_guard_1 = require("../app/guard/auth.guard");
 var all_posts_component_1 = require("./pages/all-posts/all-posts.component");
 var my_posts_component_1 = require("./pages/my-posts/my-posts.component");
+var forgetpassword_component_1 = require("./pages/forgetpassword/forgetpassword.component");
 var appRoutes = [
     {
         path: '',
@@ -34,12 +35,17 @@ var appRoutes = [
         component: all_posts_component_1.AllPostsComponent
     }, {
         path: 'my-posts',
-        component: my_posts_component_1.MyPostsComponent
-        // canActivate: [AuthGuard]
+        component: my_posts_component_1.MyPostsComponent,
+        canActivate: [auth_guard_1.AuthGuard]
     },
     {
         path: 'user-profile',
-        component: user_profile_component_1.UserProfileComponent
+        component: user_profile_component_1.UserProfileComponent,
+        canActivate: [auth_guard_1.AuthGuard]
+    },
+    {
+        path: 'forget-password',
+        component: forgetpassword_component_1.ForgetpasswordComponent
     },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

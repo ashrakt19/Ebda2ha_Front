@@ -24,6 +24,9 @@ var AuthService = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    AuthService.prototype.SignUp = function (user) {
+        return this.http.post(this.SERVER_URL + "/auth/SignUp", user);
+    };
     AuthService.prototype.login = function (email, password) {
         var _this = this;
         return this.http.post(this.SERVER_URL + "/auth/joinUS", { email: email, password: password })
@@ -42,11 +45,11 @@ var AuthService = /** @class */ (function () {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     };
-    AuthService.prototype.verify = function (code, email) {
-        return this.http.post(this.SERVER_URL + "/auth/validate", {
-            code: code,
-            email: email
-        });
+    AuthService.prototype.getResetPass = function (email) {
+        return this.http.put(this.SERVER_URL + '/auth/resetPassword', { email: email });
+    };
+    AuthService.prototype.verifyEmail = function (code) {
+        return this.http.put(this.SERVER_URL + '/auth/validate', { code: code });
     };
     AuthService = __decorate([
         core_1.Injectable({

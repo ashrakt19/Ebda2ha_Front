@@ -8,6 +8,7 @@ import { Role } from '../app/models/role';
 import { AuthGuard } from '../app/guard/auth.guard';
 import { AllPostsComponent } from './pages/all-posts/all-posts.component';
 import { MyPostsComponent } from './pages/my-posts/my-posts.component';
+import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component'
 
 const appRoutes: Routes = [
   {
@@ -32,13 +33,17 @@ path: 'all-posts',
 component: AllPostsComponent 
 },{
 path: 'my-posts', 
-component: MyPostsComponent
-// canActivate: [AuthGuard]
+component: MyPostsComponent,
+canActivate: [AuthGuard]
 },
 { 
     path: 'user-profile', 
     component: UserProfileComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
+},
+{ 
+    path: 'forget-password', 
+    component: ForgetpasswordComponent,
 },
 
   // otherwise redirect to home

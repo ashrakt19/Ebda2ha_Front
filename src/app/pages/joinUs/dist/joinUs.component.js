@@ -12,13 +12,11 @@ var forms_1 = require("@angular/forms");
 var operators_1 = require("rxjs/operators");
 var Must_Match_1 = require("../../_helpers/Must Match");
 var JoinUsComponent = /** @class */ (function () {
-    function JoinUsComponent(formBuilder, route, router, auth, userservice, alertService) {
+    function JoinUsComponent(formBuilder, route, router, auth) {
         this.formBuilder = formBuilder;
         this.route = route;
         this.router = router;
         this.auth = auth;
-        this.userservice = userservice;
-        this.alertService = alertService;
         this.showValidText = false;
         this.loading = false;
         this.submitted = false;
@@ -38,7 +36,7 @@ var JoinUsComponent = /** @class */ (function () {
         //login form
         this.loginForm = this.formBuilder.group({
             email: ['', [forms_1.Validators.required, forms_1.Validators.email]],
-            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(6)]]
+            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(8)]]
         });
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -48,7 +46,7 @@ var JoinUsComponent = /** @class */ (function () {
             lastName: ['', [forms_1.Validators.required]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.email]],
             role: ['', [forms_1.Validators.required]],
-            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(6)]],
+            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(8)]],
             confirm: ['', forms_1.Validators.required]
         }, {
             validator: Must_Match_1.MustMatch('password', 'confirm')
@@ -77,14 +75,13 @@ var JoinUsComponent = /** @class */ (function () {
         this.loading = true;
         this.auth.login(this.f.email.value, this.f.password.value)
             .pipe(operators_1.first())
-            .subscribe(function (data) {
+            .subscribe(function (res) {
             _this.router.navigate(['/user-profile']);
         }, function (error) {
             _this.error = error;
             _this.loading = false;
         });
         console.log(this.loginForm.value);
-        console.log("logged success");
     };
     JoinUsComponent.prototype.onsignUp = function () {
         var _this = this;
@@ -94,26 +91,28 @@ var JoinUsComponent = /** @class */ (function () {
             return;
         }
         this.loading = true;
-        this.userservice.SignUp(this.registerFrom.value)
+        this.auth.SignUp(this.registerFrom.value)
             .pipe(operators_1.first())
-            .subscribe(function (data) {
-            _this.registerFrom.valid;
+            .subscribe(function (res) {
             _this.showValidText = true;
         }, function (error) {
-            _this.alertService.error(error);
-            _this.loading = false;
+            console.log(error);
         });
         console.log(this.registerFrom.value);
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerFrom.value, null, 4));
     };
     JoinUsComponent.prototype.onVerify = function () {
         var _this = this;
-        console.log(this.code, this.registerFrom.value.email);
-        this.auth.verify(this.code, this.registerFrom.value.email).subscribe(function (res) {
+        this.auth.verifyEmail(this.code).subscribe(function (res) {
             _this.router.navigate(['/user-profile']);
         }, function (error) {
-            _this.alertService.error(error);
-            _this.loading = false;
+            console.log(error);
+        });
+    };
+    JoinUsComponent.prototype.onResetPassword = function () {
+        this.auth.getResetPass(this.f.email.value).subscribe(function (res) {
+            console.log("sent mail to email user to reset pass");
+        }, function (error) {
+            console.log("an error occur");
         });
     };
     JoinUsComponent = __decorate([

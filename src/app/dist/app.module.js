@@ -37,6 +37,7 @@ var alert_component_1 = require("./alert/alert.component");
 var all_posts_component_1 = require("./pages/all-posts/all-posts.component");
 var add_post_component_1 = require("./pages/add-post/add-post.component");
 var my_posts_component_1 = require("./pages/my-posts/my-posts.component");
+var forgetpassword_component_1 = require("./pages/forgetpassword/forgetpassword.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -75,6 +76,7 @@ var AppModule = /** @class */ (function () {
                 all_posts_component_1.AllPostsComponent,
                 add_post_component_1.AddPostComponent,
                 my_posts_component_1.MyPostsComponent,
+                forgetpassword_component_1.ForgetpasswordComponent,
             ], providers: [
                 { provide: http_1.HTTP_INTERCEPTORS, useClass: jwt_interceptor_1.JwtInterceptor, multi: true },
                 { provide: http_1.HTTP_INTERCEPTORS, useClass: error_Interceptor_1.ErrorInterceptor, multi: true },

@@ -68,17 +68,7 @@ form.sign-up-form {
 }
 
 
-.btn {
-  width: 150px;
-  height: 49px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  color: #fff;
-  font-weight: 600;
-  margin: 10px 0;
-  transition: 0.5s;
-}
+
 .form-control-label{
   color: #fff;
 }
@@ -160,15 +150,7 @@ form.sign-up-form {
   padding: 0.7rem 0;
 }
 
-.btn.transparent {
-  margin: 0;
-  background: none;
-  border: 2px solid #fff;
-  width: 130px;
-  height: 41px;
-  font-weight: 600;
-  font-size: 0.8rem;
-}
+
 
 .image {
   width: 100%;
@@ -279,11 +261,6 @@ form.sign-up-form {
     padding: 0.5rem 0;
   }
 
-  .btn.transparent {
-    width: 110px;
-    height: 35px;
-    font-size: 0.7rem;
-  }
 
   .container:before {
     width: 1500px;

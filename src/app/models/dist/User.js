@@ -7,3 +7,8 @@ var User = /** @class */ (function () {
     return User;
 }());
 exports.User = User;
+;
+{
+    timestamps: true;
+}
+;

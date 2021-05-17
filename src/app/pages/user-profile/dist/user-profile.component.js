@@ -9,11 +9,43 @@ exports.__esModule = true;
 exports.UserProfileComponent = void 0;
 var core_1 = require("@angular/core");
 var UserProfileComponent = /** @class */ (function () {
-    function UserProfileComponent(authService, userService) {
-        this.authService = authService;
+    function UserProfileComponent(userService) {
         this.userService = userService;
+        this.title = 'fileUpload';
+        this.images = null;
     }
     UserProfileComponent.prototype.ngOnInit = function () {
+        this.onGetMyProfile();
+    };
+    UserProfileComponent.prototype.onGetMyProfile = function () {
+        var _this = this;
+        this.userService.myProfile().subscribe(function (res) {
+            _this.firstName = res.firstName;
+            _this.lastName = res.lastName;
+            _this.img = res.pic;
+            _this.email = res.email;
+            _this.DOB = res.DOB;
+            _this.job = res.job;
+            _this.bio = res.bio;
+            _this.education = res.education;
+        }, function (err) {
+            return console.log({
+                message: "an error occured"
+            });
+        });
+    };
+    UserProfileComponent.prototype.onEditProfile = function () {
+        this.userService.updateProfile(this.id).subscribe(function (res) {
+            console.log("hi");
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    UserProfileComponent.prototype.selectImage = function (event) {
+        if (event.target.files.length > 0) {
+            var file = event.target.files[0];
+            this.images = file;
+        }
     };
     UserProfileComponent = __decorate([
         core_1.Component({

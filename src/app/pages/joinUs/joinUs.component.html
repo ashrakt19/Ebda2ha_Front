@@ -19,14 +19,8 @@
           <h2 class="title">Sign in</h2>
           <div class="row">
             <div class="col-md-12">
-              <label class="form-control-label">Email *</label>
-              <div
-                class="form-group"
-                [ngClass]="{
-                  'has-danger':
-                    (f.email.touched || f.email.dirty) && !f.email.valid
-                }"
-              >
+              <label class="form-control-label">Email</label>
+              <div class="form-group">
                 <input
                   type="email"
                   id="input-email"
@@ -39,18 +33,17 @@
                       (f.email.touched || f.email.dirty) && !f.email.valid
                   }"
                 />
+                <div
+                  *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)"
+                  class="alert text-white animated shake"
+                >
+                  <div *ngIf="f.email.errors.required">Email is required</div>
+                </div>
               </div>
             </div>
             <div class="col-md-12">
-              <label class="form-control-label">Password *</label>
-              <div
-                class="form-group"
-                [ngClass]="{
-                  'has-danger':
-                    (f.password.touched || f.password.dirty) &&
-                    !f.password.valid
-                }"
-              >
+              <label class="form-control-label">Password</label>
+              <div class="form-group">
                 <input
                   type="password"
                   id="input-password"
@@ -64,15 +57,29 @@
                       !f.password.valid
                   }"
                 />
+                <div
+                  *ngIf="
+                    f.password.invalid &&
+                    (f.password.dirty || f.password.touched)
+                  "
+                  class="alert text-white animated shake"
+                >
+                  <div *ngIf="f.password.errors.required">
+                    You have to enter the password
+                  </div>
+                </div>
               </div>
             </div>
+
+            <div class="col-md-12">
+              <button (click)="onResetPassword()" class="btn btn-default">
+                <small>Forgot password?</small>
+              </button>
+            </div>
           </div>
-          <button
-            type="submit"
-            class="btn transparent"
-            [disabled]="!loginForm.valid"
-          >
-            Login
+
+          <button type="submit" class="btn btn-outline-secondary text-white">
+            Sign in
           </button>
         </form>
         <form
@@ -83,7 +90,7 @@
           <h2 class="title">Sign Up</h2>
           <div class="row">
             <div class="col-md-6">
-              <label class="form-control-label">First Name *</label>
+              <label class="form-control-label">First Name</label>
               <div
                 class="form-group"
                 [ngClass]="{
@@ -108,7 +115,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <label class="form-control-label">Last Name *</label>
+              <label class="form-control-label">Last Name</label>
               <div
                 class="form-group"
                 [ngClass]="{
@@ -133,7 +140,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <label class="form-control-label">Email *</label>
+              <label class="form-control-label">Email</label>
               <div
                 class="form-group"
                 [ngClass]="{
@@ -158,7 +165,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <label class="form-control-label">Role *</label>
+              <label class="form-control-label">Role</label>
               <div
                 class="form-group"
                 [ngClass]="{
@@ -183,7 +190,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <label class="form-control-label">Password *</label>
+              <label class="form-control-label">Password</label>
               <div
                 class="form-group"
                 [ngClass]="{
@@ -208,13 +215,12 @@
               </div>
             </div>
             <div class="col-md-6">
-              <label class="form-control-label">Confirm Password *</label>
+              <label class="form-control-label">Confirm Password</label>
               <div
                 class="form-group"
                 [ngClass]="{
                   'has-danger':
-                    (myForm.confirm.touched ||
-                      myForm.confirm.dirty) &&
+                    (myForm.confirm.touched || myForm.confirm.dirty) &&
                     !myForm.confirm.valid
                 }"
               >
@@ -227,54 +233,41 @@
                   placeholder="Confirm Password"
                   [ngClass]="{
                     'is-invalid':
-                      (myForm.confirm.touched ||
-                        myForm.confirm.dirty) &&
+                      (myForm.confirm.touched || myForm.confirm.dirty) &&
                       !myForm.confirm.valid
                   }"
                 />
               </div>
             </div>
-        </div>
-        <button
-        type="submit"
-        class="btn transparent"
-        [disabled]="!registerFrom.valid"
-        >
-        Register
-      </button>
-      
-    </form>
-    <div class="row" *ngIf="showValidText && registerFrom.valid">
-      <div class="col-md-6" >
-        <label class="form-control-label">Please Check your mail and Enter your code</label>
-        <div
-          class="input-group input-group-alternative animated zoomIn"
-        >
-          <div class="input-group-prepend">
-            <span class="input-group-text"
-              ><i class="ni ni-check-bold"></i>
-            </span>
           </div>
-          <input
-            class="form-control"
-            placeholder="Enter your code"
-            type="text"
-            name="validationCode"
-            [(ngModel)]="code"
-          />
-        </div>
-          <button
-            type="button"
-            (click)="onVerify()"
-            class="btn btn-warning"
-          >
-            <i class="fas fa-paper-plane"></i>
-          </button>
-
+          <div class="text-center">
+            <button type="submit" class="btn btn-outline-secondary text-white">
+              Create Account
+            </button>
+          </div>
+          <div class="col-md-12" *ngIf="showValidText">
+            <label class="text-white">Check your mail and verfiy it</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="code"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="your code"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary text-white"
+                  type="button"
+                  (click)="onVerify()"
+                >
+                  code <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-    </div> 
-        
-      </div> 
       <!--animation panels-->
       <div class="panel-container">
         <!--left panel to sign up form-->
@@ -286,7 +279,7 @@
               start it up together!
             </p>
             <button
-              class="btn transparent"
+              class="btn btn-warning"
               id="sign-up-btn"
               (click)="toggleClass()"
             >
@@ -304,7 +297,7 @@
               Let's go on y a7la client f eldonia let's make agmad sho5l :"D
             </p>
             <button
-              class="btn transparent"
+              class="btn btn-warning"
               id="sign-in-btn"
               (click)="toggleClass()"
             >
@@ -322,4 +315,6 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>
+<div class="bg-default">
+  <app-footer></app-footer>
+</div>

@@ -10,15 +10,19 @@ exports.NavbarComponent = void 0;
 var core_1 = require("@angular/core");
 var sidebar_component_1 = require("../sidebar/sidebar.component");
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(location, element, router, authservice) {
+    function NavbarComponent(location, element, router, authservice, userService) {
         this.element = element;
         this.router = router;
         this.authservice = authservice;
+        this.userService = userService;
         this.isCollapsed = true;
         this.location = location;
     }
     NavbarComponent.prototype.ngOnInit = function () {
         this.listTitles = sidebar_component_1.ROUTES.filter(function (listTitle) { return listTitle; });
+        if (this.authservice.currentUserValue) {
+            this.onuserProfile();
+        }
     };
     NavbarComponent.prototype.getTitle = function () {
         var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -35,6 +39,35 @@ var NavbarComponent = /** @class */ (function () {
     NavbarComponent.prototype.onLogout = function () {
         this.authservice.logout();
         this.router.navigate(['/home']);
+    };
+    NavbarComponent.prototype.onuserProfile = function () {
+        var _this = this;
+        this.userService.myProfile().subscribe(function (res) {
+            //     firstName: this.currentUserValue.firstName,
+            //     lastName: this.currentUserValue.lastName,
+            //     email: this.currentUserValue.email,
+            //     pic: this.currentUserValue.pic,
+            //     role: this.currentUserValue.role,
+            //     gender: this.currentUserValue.gender,
+            //     DOB: this.currentUserValue.DOB,
+            //     bio: this.currentUserValue.bio,
+            //     summary: this.currentUserValue.summary,
+            //     // message: "you fetched the user successfully",
+            // user : {
+            //  this.user.firstName = res.firstName,
+            //   res.lastName,
+            //   res.pic,
+            //   res.role,
+            //   res.email
+            // }
+            _this.firstName = res.firstName;
+            _this.lastName = res.lastName;
+            _this.img = res.pic;
+        }, function (err) {
+            return console.log({
+                message: "an error occured"
+            });
+        });
     };
     NavbarComponent = __decorate([
         core_1.Component({

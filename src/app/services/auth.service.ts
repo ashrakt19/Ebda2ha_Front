@@ -21,6 +21,9 @@ export class AuthService {
   public get currentUserValue(): User {
       return this.currentUserSubject.value;
   }
+  SignUp(user: User) {
+    return this.http.post<User>(this.SERVER_URL + `/auth/SignUp`, user)
+}
 
   login(email: string, password: string) {
       return this.http.post<any>(this.SERVER_URL + "/auth/joinUS", { email, password })
@@ -41,12 +44,12 @@ export class AuthService {
       localStorage.removeItem('currentUser');
       this.currentUserSubject.next(null);
   }
+  getResetPass(email: string){
+    return this.http.put<any>(this.SERVER_URL +'/auth/resetPassword', {email})
+  }
 
-  verify(code: number, email: string) {
-    return this.http.post<any>(this.SERVER_URL + "/auth/validate", {
-      code,
-      email
-    });
+  verifyEmail(code: String) {
+    return this.http.put<any>(this.SERVER_URL + '/auth/validate', {code});
   }
 }
 

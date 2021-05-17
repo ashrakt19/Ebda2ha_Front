@@ -23,11 +23,11 @@ var UserService = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    // getById(id: number) {
-    //     return this.http.get(`/users/` + id);
-    // }
-    UserService.prototype.SignUp = function (user) {
-        return this.http.post(this.SERVER_URL + "/users/register", user);
+    UserService.prototype.myProfile = function () {
+        return this.http.get(this.SERVER_URL + '/profile');
+    };
+    UserService.prototype.updateProfile = function (id) {
+        return this.http.put(this.SERVER_URL + '/profile/updateProfile', { id: id });
     };
     UserService = __decorate([
         core_1.Injectable({ providedIn: 'root' })

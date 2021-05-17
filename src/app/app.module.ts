@@ -30,6 +30,7 @@ import { CountToModule } from 'angular-count-to';
 import { AllPostsComponent } from './pages/all-posts/all-posts.component';
 import { AddPostComponent } from './pages/add-post/add-post.component';
 import { MyPostsComponent } from './pages/my-posts/my-posts.component';
+import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { MyPostsComponent } from './pages/my-posts/my-posts.component';
     AllPostsComponent,
     AddPostComponent,
     MyPostsComponent,
+    ForgetpasswordComponent,
       ], providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
