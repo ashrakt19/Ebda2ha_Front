@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AboutUsService } from 'src/app/services/about-us.service';
 
 
@@ -12,7 +13,7 @@ import { AboutUsService } from 'src/app/services/about-us.service';
 export class AboutUsComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
-    private aboutusService: AboutUsService) { }
+    private aboutusService: AboutUsService, private toastr: ToastrService) { }
   newNum = 0;
   newNum2 = 0;
   options = {
@@ -58,10 +59,10 @@ export class AboutUsComponent implements OnInit {
           console.log(res)
 
         },
-        error => {
-          console.log(error)
-        });
-    console.log(this.contactFrom.value)
+       err=>{
+         this.toastr.error(err)
+       })
+ 
   }
 
 }

@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<section class="page-section bg-default ">
+    <div class="container">
+<div class="card bg-secondary shadow">
+    <div class="card-header bg-white border-0">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h3 class="mb-0">Posted By: UserName</h3>
+        </div>
+        <div class="col-4 text-right">
+            <button class=" btn btn-warning"  *ngIf="userService.currentUserValue">Edit Post</button> 
+            <button class="btn btn-danger" *ngIf="userService.currentUserValue">Delete Post</button>               
+            <button class="btn btn-warning" *ngIf="!userService.currentUserValue">Connect User</button>               
+                       
+          </div>
+      </div>
+    </div>
+    <div class="card-body">
+        <!-- <img class="card-img-top"
+        src="../../../assets/aboutus.png"
+        
+        alt="Card image cap"> -->
+      <div class="card-body">
+        <h1 class="card-title">name: lalalaa</h1>
+        <h3 class="card-text">Category: lalalala</h3>
+        <h3 class="card-text">Content: lalalala</h3>
+        <h3 class="card-text">Phone: lalalala</h3>
+        <h3 class="card-text">Location: alalala</h3>
+        <h3 class="card-text">Description: alalala</h3>
+      </div>
+    <!-- <div class="card-img-right">
+<img src="../../../assets/aboutus.png">
+    </div> -->
+      <div class="row">
+       
+        <div class="col-lg-6 d-flex justify-content-end align-items-center text-muted">
+          
+         
+        </div>
+    
+      </div>
+     
+    </div>
+  </div>
+  </div>
+  </section>
+<div class="bg-default">
+  <app-footer ></app-footer>
+</div>

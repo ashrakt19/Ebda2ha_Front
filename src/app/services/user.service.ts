@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from "rxjs";
 import { User } from '../models/User';
+import { ChangePassword } from '../models/ChangePassword';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -23,5 +24,8 @@ export class UserService {
   }
   updateProfile(id: string){
     return this.http.put<User>(this.SERVER_URL + '/profile/updateProfile', {id})
+  }
+  changePass(changepassword: ChangePassword){
+    return this.http.put<any>(this.SERVER_URL+'/profile/changePass',changepassword)
   }
 }

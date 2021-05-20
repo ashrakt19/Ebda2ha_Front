@@ -18,6 +18,7 @@ import { ComponentsModule } from './components/components.module';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 
 import { ErrorInterceptor } from '../app/_helpers/error.Interceptor';
 import { JwtInterceptor } from '../app/_helpers/jwt.interceptor';
@@ -26,11 +27,14 @@ import { DashboardComponent } from '../app/pages/dashboard/dashboard.component';
 import { UserProfileComponent } from '../app/pages/user-profile/user-profile.component';
 import { JoinUsComponent } from '../app/pages/joinUs/joinUs.component';
 import { AlertComponent } from './alert/alert.component';
-import { CountToModule } from 'angular-count-to';
+import { MatDialogModule } from '@angular/material/dialog'
 import { AllPostsComponent } from './pages/all-posts/all-posts.component';
 import { AddPostComponent } from './pages/add-post/add-post.component';
 import { MyPostsComponent } from './pages/my-posts/my-posts.component';
 import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
+import { ChatComponent } from './pages/chat/chat.component';
 
 @NgModule({
   imports: [
@@ -40,6 +44,8 @@ import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.c
     ComponentsModule,
     NgbModule,
     RouterModule,
+    MatDialogModule,
+    NgxPaginationModule,
     routing,
     ReactiveFormsModule,
     FormsModule,
@@ -53,7 +59,10 @@ import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.c
     MatIconModule, 
     MatButtonModule, 
     MatToolbarModule, 
-    FlexLayoutModule
+    FlexLayoutModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-center-center'
+    })
   ],
   declarations: [
     AppComponent,
@@ -67,6 +76,8 @@ import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.c
     AddPostComponent,
     MyPostsComponent,
     ForgetpasswordComponent,
+    PostDetailsComponent,
+    ChatComponent,
       ], providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

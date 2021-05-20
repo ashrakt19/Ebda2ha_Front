@@ -1,9 +1,4 @@
-
- 
-      
-
-      <app-sidebar></app-sidebar>
-      <div class="main-content">
+      <div>
         <!-- Top navbar -->
         <app-navbar></app-navbar>
         <!-- Pages -->
@@ -11,98 +6,63 @@
             <section class="page-section ">
               <div class="container">
                 <div class="text-center">
-                    <p class="text-white">
-                        Welcome to your posts here you can find all your posts and you can edit on them.
-                      </p>
-                 
+                  <div class="row">
+                    <div class="col-sm">
+                      <h1 class="text-white">In This Page You Can See Your All Posts.</h1>
+                    </div>
+                    <div class="col-sm">
+                      <button class="btn btn-warning text-white mt-2" (click)="openAdd()">Add New Post</button>
+            
+                    </div>
+                  </div>
+                  
+                    
+                </div>
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6" *ngFor="let post of posts | paginate: config">
+                    <div class="card-group">
+                      <div class="card">
+                        <img class="card-img-top"
+                          src=""
+                          
+                          alt="Card image cap">
+                        <div class="card-body">
+                          <h1 class="card-title">{{post.StartupName}}</h1>
+                          <p class="card-text">Category: {{post.category}}</p>
+                          <p class="card-text">Location: {{post.addressLine}}</p>
+                        </div>
+                        <a routerLink="/post-details" class="btn text-center  text-warning">See full post <i class="fas fa-eye"></i> </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-xl-3 col-lg-6">
                     <div class="card-group">
                       <div class="card">
-                        <img
-                          class="card-img-top"
-                          src="../../../assets/aboutus.jpg"
-                          alt="Card image cap"
-                        />
+                        <img class="card-img-top"
+                          src="../../../assets/aboutus.png"
+                          
+                          alt="Card image cap">
                         <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                          </p>
+                          <h1 class="card-title">name</h1>
+                          <p class="card-text">Category</p>
+                          <p class="card-text">Location</p>
                         </div>
-                        <a class="btn text-center btn-warning text-white"
-                          >See full post <i class="fas fa-eye"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xl-3 col-lg-6">
-                    <div class="card-group">
-                      <div class="card">
-                        <img
-                          class="card-img-top"
-                          src="../../../assets/aboutus.jpg"
-                          alt="Card image cap"
-                        />
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                          </p>
-                        </div>
-                        <a class="btn text-center btn-warning text-white"
-                          >See full post <i class="fas fa-eye"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xl-3 col-lg-6">
-                    <div class="card-group">
-                      <div class="card">
-                        <img
-                          class="card-img-top"
-                          src="../../../assets/aboutus.jpg"
-                          alt="Card image cap"
-                        />
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                          </p>
-                        </div>
-                        <a class="btn text-center btn-warning text-white"
-                          >See full post <i class="fas fa-eye"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xl-3 col-lg-6">
-                    <div class="card-group">
-                      <div class="card">
-                        <img
-                          class="card-img-top"
-                          src="../../../assets/aboutus.jpg"
-                          alt="Card image cap"
-                        />
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                          </p>
-                        </div>
-                        <a class="btn text-center btn-warning text-white"
-                          >See full post <i class="fas fa-eye"></i>
-                        </a>
+                        <a routerLink="/post-details" class="btn btn-warning text-center">See full post <i class="fas fa-eye"></i> </a>
                       </div>
                     </div>
                   </div>
                 </div>
+                <div class="card-footer bg-default">
+                  <div class="stats">
+                    <pagination-controls (pageChange)="onPageChange($event)" class="my-pagination">
+                    </pagination-controls>
+                  </div>
+                </div>
               </div>
+                
+              
             </section>
           </div>
       <div class="bg-default">

@@ -8,14 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.UserProfileComponent = void 0;
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var Must_Match_1 = require("src/app/_helpers/Must Match");
 var UserProfileComponent = /** @class */ (function () {
-    function UserProfileComponent(userService) {
+    function UserProfileComponent(userService, toastr, formBuilder) {
         this.userService = userService;
+        this.toastr = toastr;
+        this.formBuilder = formBuilder;
         this.title = 'fileUpload';
         this.images = null;
     }
     UserProfileComponent.prototype.ngOnInit = function () {
         this.onGetMyProfile();
+        this.changePasswordForm = this.formBuilder.group({
+            oldPassword: ['', [forms_1.Validators.required]],
+            newPassword: ['', [forms_1.Validators.required, forms_1.Validators.minLength(8)]],
+            confirmPassword: ['', forms_1.Validators.required]
+        }, {
+            validator: Must_Match_1.MustMatch('newPassword', 'confirmPassword')
+        });
     };
     UserProfileComponent.prototype.onGetMyProfile = function () {
         var _this = this;
@@ -29,16 +40,15 @@ var UserProfileComponent = /** @class */ (function () {
             _this.bio = res.bio;
             _this.education = res.education;
         }, function (err) {
-            return console.log({
-                message: "an error occured"
-            });
+            _this.toastr.error(err);
         });
     };
     UserProfileComponent.prototype.onEditProfile = function () {
+        var _this = this;
         this.userService.updateProfile(this.id).subscribe(function (res) {
             console.log("hi");
         }, function (err) {
-            console.log(err);
+            _this.toastr.error(err);
         });
     };
     UserProfileComponent.prototype.selectImage = function (event) {
@@ -46,6 +56,16 @@ var UserProfileComponent = /** @class */ (function () {
             var file = event.target.files[0];
             this.images = file;
         }
+        console.log(this.images);
+    };
+    UserProfileComponent.prototype.onChangePassword = function () {
+        var _this = this;
+        this.userService.changePass(this.changePasswordForm.value)
+            .subscribe(function (res) {
+            _this.toastr.success('You Change Your Password Successfuly');
+        }, function (err) {
+            _this.toastr.error(err);
+        });
     };
     UserProfileComponent = __decorate([
         core_1.Component({

@@ -10,11 +10,12 @@ exports.NavbarComponent = void 0;
 var core_1 = require("@angular/core");
 var sidebar_component_1 = require("../sidebar/sidebar.component");
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(location, element, router, authservice, userService) {
+    function NavbarComponent(location, element, router, authservice, userService, toastr) {
         this.element = element;
         this.router = router;
         this.authservice = authservice;
         this.userService = userService;
+        this.toastr = toastr;
         this.isCollapsed = true;
         this.location = location;
     }
@@ -38,7 +39,8 @@ var NavbarComponent = /** @class */ (function () {
     };
     NavbarComponent.prototype.onLogout = function () {
         this.authservice.logout();
-        this.router.navigate(['/home']);
+        this.toastr.success('You Logged Out Successfully!');
+        this.router.navigate(['/joinUs']);
     };
     NavbarComponent.prototype.onuserProfile = function () {
         var _this = this;
@@ -64,9 +66,7 @@ var NavbarComponent = /** @class */ (function () {
             _this.lastName = res.lastName;
             _this.img = res.pic;
         }, function (err) {
-            return console.log({
-                message: "an error occured"
-            });
+            _this.toastr.error(err);
         });
     };
     NavbarComponent = __decorate([

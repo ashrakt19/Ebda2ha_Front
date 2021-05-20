@@ -12,6 +12,8 @@ var auth_guard_1 = require("../app/guard/auth.guard");
 var all_posts_component_1 = require("./pages/all-posts/all-posts.component");
 var my_posts_component_1 = require("./pages/my-posts/my-posts.component");
 var forgetpassword_component_1 = require("./pages/forgetpassword/forgetpassword.component");
+var add_post_component_1 = require("./pages/add-post/add-post.component");
+var post_details_component_1 = require("./pages/post-details/post-details.component");
 var appRoutes = [
     {
         path: '',
@@ -46,6 +48,14 @@ var appRoutes = [
     {
         path: 'forget-password',
         component: forgetpassword_component_1.ForgetpasswordComponent
+    },
+    {
+        path: 'add-post',
+        component: add_post_component_1.AddPostComponent
+    },
+    {
+        path: 'post-details',
+        component: post_details_component_1.PostDetailsComponent
     },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

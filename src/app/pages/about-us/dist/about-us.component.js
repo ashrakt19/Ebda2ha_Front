@@ -10,9 +10,10 @@ exports.AboutUsComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var AboutUsComponent = /** @class */ (function () {
-    function AboutUsComponent(formBuilder, aboutusService) {
+    function AboutUsComponent(formBuilder, aboutusService, toastr) {
         this.formBuilder = formBuilder;
         this.aboutusService = aboutusService;
+        this.toastr = toastr;
         this.newNum = 0;
         this.newNum2 = 0;
         this.options = {
@@ -48,13 +49,13 @@ var AboutUsComponent = /** @class */ (function () {
         configurable: true
     });
     AboutUsComponent.prototype.onsubmit = function () {
+        var _this = this;
         this.aboutusService.sendContactMail(this.contactFrom.value)
             .subscribe(function (res) {
             console.log(res);
-        }, function (error) {
-            console.log(error);
+        }, function (err) {
+            _this.toastr.error(err);
         });
-        console.log(this.contactFrom.value);
     };
     AboutUsComponent = __decorate([
         core_1.Component({

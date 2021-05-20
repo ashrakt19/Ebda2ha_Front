@@ -15,12 +15,11 @@ var ErrorInterceptor = /** @class */ (function () {
         this.auth = auth;
     }
     ErrorInterceptor.prototype.intercept = function (request, next) {
-        var _this = this;
         return next.handle(request).pipe(operators_1.catchError(function (err) {
             if (err.status === 401) {
                 // auto logout if 401 response returned from api
-                _this.auth.logout();
-                location.reload(true);
+                // this.auth.logout();
+                // location.reload(true);
             }
             var error = err.error.message || err.statusText;
             return rxjs_1.throwError(error);

@@ -4,6 +4,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,7 @@ export class NavbarComponent implements OnInit {
   public isCollapsed = true;
   public location: Location;
   constructor(location: Location,  private element: ElementRef, private router: Router,
-     public authservice: AuthService,public userService: UserService) {
+     public authservice: AuthService,public userService: UserService, private toastr: ToastrService) {
     this.location = location;
   }
 
@@ -44,7 +45,8 @@ export class NavbarComponent implements OnInit {
 
   onLogout(){
     this.authservice.logout();
-    this.router.navigate(['/home']);
+    this.toastr.success('You Logged Out Successfully!')
+    this.router.navigate(['/joinUs']);
   }
   firstName
   lastName
@@ -73,8 +75,6 @@ export class NavbarComponent implements OnInit {
     this.lastName = res.lastName
     this.img = res.pic
 },  err=> {
-    return console.log({
-        message: "an error occured"
-    });
+   this.toastr.error(err)
 })}
 }

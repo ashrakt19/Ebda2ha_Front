@@ -12,11 +12,12 @@ var forms_1 = require("@angular/forms");
 var operators_1 = require("rxjs/operators");
 var Must_Match_1 = require("../../_helpers/Must Match");
 var JoinUsComponent = /** @class */ (function () {
-    function JoinUsComponent(formBuilder, route, router, auth) {
+    function JoinUsComponent(formBuilder, route, router, auth, toastr) {
         this.formBuilder = formBuilder;
         this.route = route;
         this.router = router;
         this.auth = auth;
+        this.toastr = toastr;
         this.showValidText = false;
         this.loading = false;
         this.submitted = false;
@@ -77,11 +78,10 @@ var JoinUsComponent = /** @class */ (function () {
             .pipe(operators_1.first())
             .subscribe(function (res) {
             _this.router.navigate(['/user-profile']);
-        }, function (error) {
-            _this.error = error;
-            _this.loading = false;
+            _this.toastr.success('You Logged In Successfully Hope You Doing Well with us!');
+        }, function (err) {
+            _this.toastr.error(err);
         });
-        console.log(this.loginForm.value);
     };
     JoinUsComponent.prototype.onsignUp = function () {
         var _this = this;
@@ -95,24 +95,24 @@ var JoinUsComponent = /** @class */ (function () {
             .pipe(operators_1.first())
             .subscribe(function (res) {
             _this.showValidText = true;
-        }, function (error) {
-            console.log(error);
+            _this.toastr.success('Please Check Your Mail To Activate Your Account', 'You Signed Up Successfully!');
+        }, function (err) {
+            _this.toastr.error(err);
         });
-        console.log(this.registerFrom.value);
     };
     JoinUsComponent.prototype.onVerify = function () {
         var _this = this;
         this.auth.verifyEmail(this.code).subscribe(function (res) {
             _this.router.navigate(['/user-profile']);
-        }, function (error) {
-            console.log(error);
+        }, function (err) {
+            _this.toastr.error(err);
         });
     };
     JoinUsComponent.prototype.onResetPassword = function () {
+        var _this = this;
         this.auth.getResetPass(this.f.email.value).subscribe(function (res) {
-            console.log("sent mail to email user to reset pass");
-        }, function (error) {
-            console.log("an error occur");
+        }, function (err) {
+            _this.toastr.error(err);
         });
     };
     JoinUsComponent = __decorate([

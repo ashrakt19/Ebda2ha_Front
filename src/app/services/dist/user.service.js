@@ -29,6 +29,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.updateProfile = function (id) {
         return this.http.put(this.SERVER_URL + '/profile/updateProfile', { id: id });
     };
+    UserService.prototype.changePass = function (changepassword) {
+        return this.http.put(this.SERVER_URL + '/profile/changePass', changepassword);
+    };
     UserService = __decorate([
         core_1.Injectable({ providedIn: 'root' })
     ], UserService);

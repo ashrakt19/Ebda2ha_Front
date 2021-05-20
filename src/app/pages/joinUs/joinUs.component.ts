@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { MustMatch } from '../../_helpers/Must Match';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -32,7 +34,8 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private toastr: ToastrService
   ) {
     // redirect to home if already logged in
     if (this.auth.currentUserValue) {
@@ -44,6 +47,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+   
     //login form
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -92,12 +96,12 @@ export class JoinUsComponent implements OnInit, OnDestroy {
       .subscribe(
         res => {
           this.router.navigate(['/user-profile']);
+          this.toastr.success('You Logged In Successfully Hope You Doing Well with us!')
         },
-        error => {
-          this.error = error;
-          this.loading = false;
+        err => {
+          this.toastr.error(err);
+
         });
-    console.log(this.loginForm.value)
   }
 
   onsignUp() {
@@ -113,26 +117,26 @@ export class JoinUsComponent implements OnInit, OnDestroy {
       .subscribe(
         res => {
           this.showValidText = true
-          
+         this.toastr.success('Please Check Your Mail To Activate Your Account','You Signed Up Successfully!')
         },
-        error => {
-        console.log(error)
+        err => {
+          this.toastr.error(err);
+
         });
-    console.log(this.registerFrom.value)
-   
   }
   onVerify() {
     this.auth.verifyEmail(this.code).subscribe(res => {
-     this.router.navigate(['/user-profile']);
-    },  error => {
-       console.log(error)
-      });
+      this.router.navigate(['/user-profile']);
+    },  err => {
+      this.toastr.error(err);
+
+    });
   }
   onResetPassword(){
     this.auth.getResetPass(this.f.email.value).subscribe(res=>{
-      console.log("sent mail to email user to reset pass")
-    },error => {
-      console.log("an error occur")
+   }, err => {
+      this.toastr.error(err);
+
     });
   }
 

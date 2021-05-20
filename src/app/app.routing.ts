@@ -9,6 +9,8 @@ import { AuthGuard } from '../app/guard/auth.guard';
 import { AllPostsComponent } from './pages/all-posts/all-posts.component';
 import { MyPostsComponent } from './pages/my-posts/my-posts.component';
 import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component'
+import { AddPostComponent } from './pages/add-post/add-post.component';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
 
 const appRoutes: Routes = [
   {
@@ -44,6 +46,14 @@ canActivate: [AuthGuard]
 { 
     path: 'forget-password', 
     component: ForgetpasswordComponent,
+},
+{ 
+    path: 'add-post', 
+    component: AddPostComponent,
+},
+{ 
+    path: 'post-details', 
+    component: PostDetailsComponent,
 },
 
   // otherwise redirect to home

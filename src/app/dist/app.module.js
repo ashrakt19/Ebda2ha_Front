@@ -27,6 +27,7 @@ var components_module_1 = require("./components/components.module");
 var about_us_component_1 = require("./pages/about-us/about-us.component");
 var common_1 = require("@angular/common");
 var platform_browser_1 = require("@angular/platform-browser");
+var ngx_toastr_1 = require("ngx-toastr");
 var error_Interceptor_1 = require("../app/_helpers/error.Interceptor");
 var jwt_interceptor_1 = require("../app/_helpers/jwt.interceptor");
 var home_component_1 = require("../app/pages/home/home.component");
@@ -34,10 +35,14 @@ var dashboard_component_1 = require("../app/pages/dashboard/dashboard.component"
 var user_profile_component_1 = require("../app/pages/user-profile/user-profile.component");
 var joinUs_component_1 = require("../app/pages/joinUs/joinUs.component");
 var alert_component_1 = require("./alert/alert.component");
+var dialog_1 = require("@angular/material/dialog");
 var all_posts_component_1 = require("./pages/all-posts/all-posts.component");
 var add_post_component_1 = require("./pages/add-post/add-post.component");
 var my_posts_component_1 = require("./pages/my-posts/my-posts.component");
 var forgetpassword_component_1 = require("./pages/forgetpassword/forgetpassword.component");
+var ngx_pagination_1 = require("ngx-pagination");
+var post_details_component_1 = require("./pages/post-details/post-details.component");
+var chat_component_1 = require("./pages/chat/chat.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -50,6 +55,8 @@ var AppModule = /** @class */ (function () {
                 components_module_1.ComponentsModule,
                 ng_bootstrap_1.NgbModule,
                 router_1.RouterModule,
+                dialog_1.MatDialogModule,
+                ngx_pagination_1.NgxPaginationModule,
                 app_routing_1.routing,
                 forms_1.ReactiveFormsModule,
                 forms_1.FormsModule,
@@ -63,7 +70,10 @@ var AppModule = /** @class */ (function () {
                 icon_1.MatIconModule,
                 button_1.MatButtonModule,
                 toolbar_1.MatToolbarModule,
-                flex_layout_1.FlexLayoutModule
+                flex_layout_1.FlexLayoutModule,
+                ngx_toastr_1.ToastrModule.forRoot({
+                    positionClass: 'toast-center-center'
+                })
             ],
             declarations: [
                 app_component_1.AppComponent,
@@ -77,6 +87,8 @@ var AppModule = /** @class */ (function () {
                 add_post_component_1.AddPostComponent,
                 my_posts_component_1.MyPostsComponent,
                 forgetpassword_component_1.ForgetpasswordComponent,
+                post_details_component_1.PostDetailsComponent,
+                chat_component_1.ChatComponent,
             ], providers: [
                 { provide: http_1.HTTP_INTERCEPTORS, useClass: jwt_interceptor_1.JwtInterceptor, multi: true },
                 { provide: http_1.HTTP_INTERCEPTORS, useClass: error_Interceptor_1.ErrorInterceptor, multi: true },
