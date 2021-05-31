@@ -1,17 +1,23 @@
+import { User } from "./User";
+
 export class Post {
+    _id: String;
     StartupName: {
         type: String,
         required: true
     };
     facebookpage: String;
     websitelink: String;
-    Posttype: String;
+    Posttype:{
+        type: String,
+        required: true,
+     }
     Productname: {
         type: String
     }
     Price: Number;
      pic: [{
-        type: String,
+        type: string,
     }];
     description:{
         type: String,
@@ -23,8 +29,8 @@ export class Post {
     }
     category:{
         type: String,
-        required: true
-    }
+        required: true,
+}
     phone:{
         type: Number,
         required: true
@@ -33,13 +39,14 @@ export class Post {
         type: Boolean,
         default: false
     };
-    categoryId: {
-        required: true,
-        ref: 'Category'
-    };
-    createdBy: {
-        ref: 'User'
-    }
+    // Category:{
+    //     type: String
+    // }
+    // categoryId: {
+    //     required: true,
+    //     ref: 'Category'
+    // };
+    createdBy: User;
 }; {
     timestamps: true
 }

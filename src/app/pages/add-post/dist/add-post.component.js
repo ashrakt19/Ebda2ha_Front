@@ -19,6 +19,8 @@ var AddPostComponent = /** @class */ (function () {
         this.msg = 'You must specify a description thats between 20 and 500 characters';
         this.categories = ['Product Form', 'Startup Form'];
         this.selectedCateogry = 'Category';
+        // filters= ['Food','Furniture','Handmade','Technology'];
+        // selectedFilter= 'Filter';
         this.categoryFlag = false;
         this.pic = null;
     }
@@ -27,14 +29,14 @@ var AddPostComponent = /** @class */ (function () {
             StartupName: ['', [forms_1.Validators.required]],
             description: ['', [forms_1.Validators.required, forms_1.Validators.minLength(20)]],
             addressLine: ['', [forms_1.Validators.required, forms_1.Validators.minLength(4)]],
-            category: ['', [forms_1.Validators.required]],
-            phone: ['', [forms_1.Validators.pattern("(02)[0-9]{9}"), forms_1.Validators.required]],
+            category: ['', forms_1.Validators.required],
+            // Category: ['', Validators.required],
+            phone: ['', [forms_1.Validators.required]],
             Productname: [''],
             Price: [''],
             Posttype: [''],
             facebookpage: [''],
-            websitelink: [''],
-            pic: ['', [forms_1.Validators.required]]
+            websitelink: ['']
         });
     };
     AddPostComponent.prototype.setCategory = function (category) {
@@ -50,48 +52,24 @@ var AddPostComponent = /** @class */ (function () {
         category === 'Startup Form' ? this.PostForm.get('Posttype').setValidators([forms_1.Validators.required]) : this.PostForm.get('Posttype').clearValidators();
         this.PostForm.get('Posttype').updateValueAndValidity();
     };
+    // setFilter(filter: string) {
+    //   this.selectedFilter = filter;
+    //   this.PostForm.patchValue({
+    //     Category: filter
+    //   })
+    // }
     AddPostComponent.prototype.onFileChange = function (event) {
         if (event.target.files.length > 0) {
             var file = event.target.files[0];
             this.pic = file;
         }
+        console.log(this.pic);
     };
-    // onSubmit(values) {
-    //   if (!this. pic) {
-    //     Swal.fire({
-    //       position: 'center',
-    //       icon: 'warning',
-    //       title: 'You must upload the image of your Product!',
-    //       showConfirmButton: false,
-    //       timer: 1500
-    //     })
-    //   } 
-    //   // else if(!values.location){
-    //   //   Swal.fire({
-    //   //     position: 'center',
-    //   //     icon: 'warning',
-    //   //     title: 'You must choose a location on the map !',
-    //   //     showConfirmButton: false,
-    //   //     timer: 1500
-    //   //   })
-    //   // }
-    //   else {
-    //     console.log(this.PostForm.value)
-    //     this.PostService.createPost(values).subscribe(res => {
-    //       // const formData = new FormData();
-    //       // formData.append(' pic', this. pic);
-    //       // this.http.post<any>('http://localhost:3000/posts/uploadimg/' + res.newItemId, formData).subscribe(res => console.log('Done'));
-    //       this.dialogRef.close();
-    //     }, err=>{
-    //       this.toastr.error(err);
-    //     }
-    //     )
-    //   }
-    // }
     AddPostComponent.prototype.onSubmit = function () {
         var _this = this;
         this.PostService.createPost(this.PostForm.value).subscribe(function (res) {
             _this.toastr.success('post created');
+            _this.PostForm.reset();
         }, function (err) {
             _this.toastr.error(err);
         });

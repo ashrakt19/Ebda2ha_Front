@@ -9,10 +9,24 @@ exports.__esModule = true;
 exports.PostDetailsComponent = void 0;
 var core_1 = require("@angular/core");
 var PostDetailsComponent = /** @class */ (function () {
-    function PostDetailsComponent(userService) {
+    function PostDetailsComponent(postService, userService, _Activatedroute, _router) {
+        this.postService = postService;
         this.userService = userService;
+        this._Activatedroute = _Activatedroute;
+        this._router = _router;
+        this.user = this.userService.currentUserValue;
     }
     PostDetailsComponent.prototype.ngOnInit = function () {
+        this.postId = this._Activatedroute.snapshot.paramMap.get("postId");
+        this.getPost();
+    };
+    PostDetailsComponent.prototype.getPost = function () {
+        var _this = this;
+        // debugger
+        this.postService.findPost(this.postId).subscribe(function (res) {
+            _this.post = res;
+            console.log(_this.post);
+        });
     };
     PostDetailsComponent = __decorate([
         core_1.Component({

@@ -8,211 +8,538 @@
   </div>
   <div class="card-body">
     <div class="row">
-     
-      <div class="col-lg-6 d-flex justify-content-end align-items-center text-muted">
-        <h5> Please Select a category of form
-        </h5>
+      <div
+        class="
+          col-lg-6
+          d-flex
+          justify-content-end
+          align-items-center
+          text-muted
+        "
+      >
+        <h5>Please Select a category of form</h5>
         <div ngbDropdown>
-          <button class="btn btn-default"
-            [ngClass]="{'btn-warning animated pulse delay-1s infinite': selectedCateogry=='Category'}"
-            id="dropdownBasic1" ngbDropdownToggle>
+          <button
+            class="btn btn-default"
+            [ngClass]="{
+              'btn-warning animated pulse delay-1s infinite':
+                selectedCateogry == 'Category'
+            }"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
             {{ selectedCateogry }}
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button ngbDropdownItem *ngFor="let category of categories" (click)="setCategory(category)">
+            <button
+              ngbDropdownItem
+              *ngFor="let category of categories"
+              (click)="setCategory(category)"
+            >
               {{ category }}
             </button>
           </div>
         </div>
       </div>
       <div class="col-lg-6 d-flex justify-content-center align-items-center">
-  
-        <input style="display: none" id="file" type="file" class="form-control" #fileInput
-          (change)="onFileChange($event)">
-        <button [ngClass]="{'animated pulse infinite delay-1s btn-warning': pic==null}" class="btn btn-default"
-          (click)="fileInput.click()">Upload a Photo</button>
+        <input
+          style="display: none"
+          id="file"
+          type="file"
+          class="form-control"
+          #fileInput
+          (change)="onFileChange($event)"
+        />
+        <button
+          [ngClass]="{
+            'animated pulse infinite delay-1s btn-warning': pic == null
+          }"
+          class="btn btn-default"
+          (click)="fileInput.click()"
+        >
+          Upload a Photo
+        </button>
       </div>
     </div>
-<form novalidate [formGroup]="PostForm" class="mt-4">
+    <form novalidate [formGroup]="PostForm" class="mt-4">
       <div class="animated fadeIn">
         <div class="pl-lg-4">
-          <div class="row"  *ngIf="selectedCateogry=='Startup Form'">
+          <div class="row" *ngIf="selectedCateogry == 'Startup Form'">
             <div class="col-lg-4">
               <h5 class="text-muted">What's Your Target From This Post?</h5>
             </div>
             <div class="col-lg-4">
-              <div class="custom-control custom-radio ">
-                <input class="custom-control-input" id="marketing" type="radio" value="marketing" name="Posttype"
-                  formControlName="Posttype" />
-                <label class="custom-control-label" for="marketing">Marketing</label>
+              <div class="custom-control custom-radio">
+                <input
+                  class="custom-control-input"
+                  id="marketing"
+                  type="radio"
+                  value="marketing"
+                  name="Posttype"
+                  formControlName="Posttype"
+                />
+                <label class="custom-control-label" for="marketing"
+                  >Marketing</label
+                >
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="custom-control custom-radio ">
-                <input class="custom-control-input " id="searchfund" type="radio" value="searchfund" name="Posttype"
-                  formControlName="Posttype" />
-                <label class="custom-control-label" for="searchfund">Search For Fund</label>
+              <div class="custom-control custom-radio">
+                <input
+                  class="custom-control-input"
+                  id="searchfund"
+                  type="radio"
+                  value="searchfund"
+                  name="Posttype"
+                  formControlName="Posttype"
+                />
+                <label class="custom-control-label" for="searchfund"
+                  >Search For Fund</label
+                >
               </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-control-label" for="input-StartupName">StartUp Name</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('StartupName').touched || PostForm.get('StartupName').dirty) && !PostForm.get('StartupName').valid }">
-                <input type="text" formControlName="StartupName" class="form-control form-control-alternative"
-                  placeholder="Startup Name" 
-                  [ngClass]="{'is-invalid': (PostForm.get('StartupName').touched || PostForm.get('StartupName').dirty) && !PostForm.get('StartupName').valid }" />
+              <label class="form-control-label" for="input-StartupName"
+                >StartUp Name</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('StartupName').touched ||
+                      PostForm.get('StartupName').dirty) &&
+                    !PostForm.get('StartupName').valid
+                }"
+              >
+                <input
+                  type="text"
+                  formControlName="StartupName"
+                  class="form-control form-control-alternative"
+                  placeholder="Startup Name"
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('StartupName').touched ||
+                        PostForm.get('StartupName').dirty) &&
+                      !PostForm.get('StartupName').valid
+                  }"
+                />
               </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-control-label" for="input-facebookpage"> Facebook Page</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('facebookpage').touched || PostForm.get('facebookpage').dirty) && !PostForm.get('facebookpage').valid }">
-                <input type="text" formControlName="facebookpage" class="form-control form-control-alternative"
-                  placeholder="Facebook Page" 
-                  [ngClass]="{'is-invalid': (PostForm.get('facebookpage').touched || PostForm.get('facebookpage').dirty) && !PostForm.get('facebookpage').valid }" />
+              <label class="form-control-label" for="input-facebookpage">
+                Facebook Page</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('facebookpage').touched ||
+                      PostForm.get('facebookpage').dirty) &&
+                    !PostForm.get('facebookpage').valid
+                }"
+              >
+                <input
+                  type="url"
+                  formControlName="facebookpage"
+                  class="form-control form-control-alternative"
+                  placeholder="Facebook Page"
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('facebookpage').touched ||
+                        PostForm.get('facebookpage').dirty) &&
+                      !PostForm.get('facebookpage').valid
+                  }"
+                />
               </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-control-label" for="input-websitelink"> WebSite Link</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('websitelink').touched || PostForm.get('websitelink').dirty) && !PostForm.get('websitelink').valid }">
-                <input type="text" formControlName="websitelink" class="form-control form-control-alternative"
-                  placeholder=" Website Link" 
-                  [ngClass]="{'is-invalid': (PostForm.get('websitelink').touched || PostForm.get('websitelink').dirty) && !PostForm.get('websitelink').valid }" />
+              <label class="form-control-label" for="input-websitelink">
+                WebSite Link</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('websitelink').touched ||
+                      PostForm.get('websitelink').dirty) &&
+                    !PostForm.get('websitelink').valid
+                }"
+              >
+                <input
+                  type="text"
+                  formControlName="websitelink"
+                  class="form-control form-control-alternative"
+                  placeholder=" Website Link"
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('websitelink').touched ||
+                        PostForm.get('websitelink').dirty) &&
+                      !PostForm.get('websitelink').valid
+                  }"
+                />
               </div>
             </div>
             <div class="col-lg-6">
               <label class="form-control-label" for="input-phone">Phone</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('phone').touched || PostForm.get('phone').dirty) && !PostForm.get('phone').valid }">
-                <input type="number" formControlName="phone" class="form-control form-control-alternative"
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('phone').touched ||
+                      PostForm.get('phone').dirty) &&
+                    !PostForm.get('phone').valid
+                }"
+              >
+                <input
+                  type="number"
+                  formControlName="phone"
+                  class="form-control form-control-alternative"
                   placeholder="Phone Number"
-                  [ngClass]="{'is-invalid': (PostForm.get('phone').touched || PostForm.get('phone').dirty) && !PostForm.get('phone').valid }" />
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('phone').touched ||
+                        PostForm.get('phone').dirty) &&
+                      !PostForm.get('phone').valid
+                  }"
+                />
               </div>
             </div>
             <div class="col-lg-6">
-                <label class="form-control-label" for="input-address">Detailed Address</label>
-                <div class="form-group "
-                  [ngClass]="{'has-danger': (PostForm.get('addressLine').touched || PostForm.get('addressLine').dirty) && !PostForm.get('addressLine').valid }">
-                  <input type="text" id="input-address" name="addressLine" formControlName="addressLine"
-                    class="form-control form-control-alternative"
-                    placeholder="1st,In Front Of The Station"
-                    [ngClass]="{'is-invalid': (PostForm.get('addressLine').touched || PostForm.get('addressLine').dirty) && !PostForm.get('addressLine').valid }" />
-                </div>
+              <label class="form-control-label" for="input-address"
+                >Detailed Address</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('addressLine').touched ||
+                      PostForm.get('addressLine').dirty) &&
+                    !PostForm.get('addressLine').valid
+                }"
+              >
+                <input
+                  type="text"
+                  id="input-address"
+                  name="addressLine"
+                  formControlName="addressLine"
+                  class="form-control form-control-alternative"
+                  placeholder="1st,In Front Of The Station"
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('addressLine').touched ||
+                        PostForm.get('addressLine').dirty) &&
+                      !PostForm.get('addressLine').valid
+                  }"
+                />
+              </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-control-label" for="input-description">Describtion about your Startup</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('description').touched || PostForm.get('description').dirty) && !PostForm.get('description').valid }">
-                <input type="text-area" id="input-description" formControlName="description" name="description"
-                  class="form-control form-control-alternative" 
+              <label class="form-control-label" for="input-description"
+                >Describtion about your Startup</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('description').touched ||
+                      PostForm.get('description').dirty) &&
+                    !PostForm.get('description').valid
+                }"
+              >
+                <input
+                  type="text-area"
+                  id="input-description"
+                  formControlName="description"
+                  name="description"
+                  class="form-control form-control-alternative"
                   placeholder="Write briefly about your StartUp"
-                  [ngClass]="{'is-invalid': (PostForm.get('description').touched || PostForm.get('description').dirty) && !PostForm.get('description').valid }" />
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('description').touched ||
+                        PostForm.get('description').dirty) &&
+                      !PostForm.get('description').valid
+                  }"
+                />
               </div>
-              <span class="alert" *ngIf="PostForm.get('description').errors?.minlength">
+              <span
+                class="alert"
+                *ngIf="PostForm.get('description').errors?.minlength"
+              >
                 This details is too short, Help us by more details please .
               </span>
             </div>
-
+            <!-- <div class="col-lg-12">
+              <div ngbDropdown>
+                <button
+                  class="btn btn-default"
+                  [ngClass]="{
+                    'btn-warning animated pulse delay-1s infinite':
+                      selectedFilter == 'Filter'
+                  }"
+                  id="dropdownBasic1"
+                  ngbDropdownToggle
+                >
+                  {{ selectedFilter }}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button
+                    ngbDropdownItem
+                    *ngFor="let filter of filters"
+                    (click)="setFilter(filter)"
+                  >
+                    {{ filter }}
+                  </button>
+                </div>
+              </div>
+            </div> -->
           </div>
-          
-          <div class="row" *ngIf="selectedCateogry=='Product Form'">
-         <div class="col-lg-6">
-              <label class="form-control-label" for="input-StartupName">StartUp Name</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('StartupName').touched || PostForm.get('StartupName').dirty) && !PostForm.get('StartupName').valid }">
-                <input type="text" formControlName="StartupName" class="form-control form-control-alternative"
-                  placeholder="Startup Name" 
-                  [ngClass]="{'is-invalid': (PostForm.get('StartupName').touched || PostForm.get('StartupName').dirty) && !PostForm.get('StartupName').valid }" />
+
+          <div class="row" *ngIf="selectedCateogry == 'Product Form'">
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-StartupName"
+                >StartUp Name</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('StartupName').touched ||
+                      PostForm.get('StartupName').dirty) &&
+                    !PostForm.get('StartupName').valid
+                }"
+              >
+                <input
+                  type="text"
+                  formControlName="StartupName"
+                  class="form-control form-control-alternative"
+                  placeholder="Startup Name"
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('StartupName').touched ||
+                        PostForm.get('StartupName').dirty) &&
+                      !PostForm.get('StartupName').valid
+                  }"
+                />
               </div>
             </div>
-            <div class="col-lg-6" >
-
-              <label class="form-control-label" for="input-Productname">Product Name</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('Productname').touched || PostForm.get('Productname').dirty) && !PostForm.get('Productname').valid }">
-                <input type="text" id="input-Productname" formControlName="Productname" name="Productname"
-                  class="form-control form-control-alternative" 
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-Productname"
+                >Product Name</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('Productname').touched ||
+                      PostForm.get('Productname').dirty) &&
+                    !PostForm.get('Productname').valid
+                }"
+              >
+                <input
+                  type="text"
+                  id="input-Productname"
+                  formControlName="Productname"
+                  name="Productname"
+                  class="form-control form-control-alternative"
                   placeholder="Product Name"
-                  [ngClass]="{'is-invalid': (PostForm.get('Productname').touched || PostForm.get('Productname').dirty) && !PostForm.get('Productname').valid }" />
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('Productname').touched ||
+                        PostForm.get('Productname').dirty) &&
+                      !PostForm.get('Productname').valid
+                  }"
+                />
               </div>
-              </div>
-              <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
               <label class="form-control-label" for="input-Price">Price</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('Price').touched || PostForm.get('Price').dirty) && !PostForm.get('Price').valid }">
-                <input type="number" id="input-Price" formControlName="Price" name="Price"
-                  class="form-control form-control-alternative" 
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('Price').touched ||
+                      PostForm.get('Price').dirty) &&
+                    !PostForm.get('Price').valid
+                }"
+              >
+                <input
+                  type="number"
+                  id="input-Price"
+                  formControlName="Price"
+                  name="Price"
+                  class="form-control form-control-alternative"
                   placeholder="Price"
-                  [ngClass]="{'is-invalid': (PostForm.get('Price').touched || PostForm.get('Price').dirty) && !PostForm.get('Price').valid }" />
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('Price').touched ||
+                        PostForm.get('Price').dirty) &&
+                      !PostForm.get('Price').valid
+                  }"
+                />
               </div>
             </div>
             <div class="col-lg-6">
               <label class="form-control-label" for="input-phone">Phone</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('phone').touched || PostForm.get('phone').dirty) && !PostForm.get('phone').valid }">
-                <input type="number" formControlName="phone" class="form-control form-control-alternative"
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('phone').touched ||
+                      PostForm.get('phone').dirty) &&
+                    !PostForm.get('phone').valid
+                }"
+              >
+                <input
+                  type="number"
+                  formControlName="phone"
+                  class="form-control form-control-alternative"
                   placeholder="Phone Number"
-                  [ngClass]="{'is-invalid': (PostForm.get('phone').touched || PostForm.get('phone').dirty) && !PostForm.get('phone').valid }" />
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('phone').touched ||
+                        PostForm.get('phone').dirty) &&
+                      !PostForm.get('phone').valid
+                  }"
+                />
               </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-control-label" for="input-facebookpage"> Facebook Page</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('facebookpage').touched || PostForm.get('facebookpage').dirty) && !PostForm.get('facebookpage').valid }">
-                <input type="text" formControlName="facebookpage" class="form-control form-control-alternative"
-                  placeholder="Facebook Page" 
-                  [ngClass]="{'is-invalid': (PostForm.get('facebookpage').touched || PostForm.get('facebookpage').dirty) && !PostForm.get('facebookpage').valid }" />
+              <label class="form-control-label" for="input-facebookpage">
+                Facebook Page</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('facebookpage').touched ||
+                      PostForm.get('facebookpage').dirty) &&
+                    !PostForm.get('facebookpage').valid
+                }"
+              >
+                <input
+                  type="text"
+                  formControlName="facebookpage"
+                  class="form-control form-control-alternative"
+                  placeholder="Facebook Page"
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('facebookpage').touched ||
+                        PostForm.get('facebookpage').dirty) &&
+                      !PostForm.get('facebookpage').valid
+                  }"
+                />
               </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-control-label" for="input-websitelink"> WebSite Link</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('websitelink').touched || PostForm.get('websitelink').dirty) && !PostForm.get('websitelink').valid }">
-                <input type="text" formControlName="websitelink" class="form-control form-control-alternative"
-                  placeholder=" Website Link" 
-                  [ngClass]="{'is-invalid': (PostForm.get('websitelink').touched || PostForm.get('websitelink').dirty) && !PostForm.get('websitelink').valid }" />
+              <label class="form-control-label" for="input-websitelink">
+                WebSite Link</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('websitelink').touched ||
+                      PostForm.get('websitelink').dirty) &&
+                    !PostForm.get('websitelink').valid
+                }"
+              >
+                <input
+                  type="text"
+                  formControlName="websitelink"
+                  class="form-control form-control-alternative"
+                  placeholder=" Website Link"
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('websitelink').touched ||
+                        PostForm.get('websitelink').dirty) &&
+                      !PostForm.get('websitelink').valid
+                  }"
+                />
               </div>
             </div>
             <div class="col-lg-6">
-                <label class="form-control-label" for="input-address">Detailed Address</label>
-                <div class="form-group "
-                  [ngClass]="{'has-danger': (PostForm.get('addressLine').touched || PostForm.get('addressLine').dirty) && !PostForm.get('addressLine').valid }">
-                  <input type="text" id="input-address" name="addressLine" formControlName="addressLine"
-                    class="form-control form-control-alternative"
-                    placeholder="1st,In Front Of The Station"
-                    [ngClass]="{'is-invalid': (PostForm.get('addressLine').touched || PostForm.get('addressLine').dirty) && !PostForm.get('addressLine').valid }" />
-                </div>
+              <label class="form-control-label" for="input-address"
+                >Detailed Address</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('addressLine').touched ||
+                      PostForm.get('addressLine').dirty) &&
+                    !PostForm.get('addressLine').valid
+                }"
+              >
+                <input
+                  type="text"
+                  id="input-address"
+                  name="addressLine"
+                  formControlName="addressLine"
+                  class="form-control form-control-alternative"
+                  placeholder="1st,In Front Of The Station"
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('addressLine').touched ||
+                        PostForm.get('addressLine').dirty) &&
+                      !PostForm.get('addressLine').valid
+                  }"
+                />
+              </div>
             </div>
             <div class="col-lg-6">
-              <label class="form-control-label" for="input-description">Describtion about your Product</label>
-              <div class="form-group"
-                [ngClass]="{'has-danger': (PostForm.get('description').touched || PostForm.get('description').dirty) && !PostForm.get('description').valid }">
-                <input type="text-area" id="input-description" formControlName="description" name="description"
-                  class="form-control form-control-alternative" 
+              <label class="form-control-label" for="input-description"
+                >Describtion about your Product</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (PostForm.get('description').touched ||
+                      PostForm.get('description').dirty) &&
+                    !PostForm.get('description').valid
+                }"
+              >
+                <input
+                  type="text-area"
+                  id="input-description"
+                  formControlName="description"
+                  name="description"
+                  class="form-control form-control-alternative"
                   placeholder="Write briefly about your Product"
-                  [ngClass]="{'is-invalid': (PostForm.get('description').touched || PostForm.get('description').dirty) && !PostForm.get('description').valid }" />
+                  [ngClass]="{
+                    'is-invalid':
+                      (PostForm.get('description').touched ||
+                        PostForm.get('description').dirty) &&
+                      !PostForm.get('description').valid
+                  }"
+                />
               </div>
-              <span class="alert" *ngIf="PostForm.get('description').errors?.minlength">
+              <span
+                class="alert"
+                *ngIf="PostForm.get('description').errors?.minlength"
+              >
                 This details is too short, Help us by more details please .
               </span>
             </div>
+          </div>
         </div>
-      
-        </div>
-     
-      
-       </div>
-       <div  *ngIf="categoryFlag==true">
-  
-       <button type="button" class="btn btn-outline-danger"   (click)="onCancel()">
-         Cancel
-       </button>
-       <button type="submit" class="btn btn-warning float-right" 
-         (click)="onSubmit(PostForm.value)">
-         Submit Post
-       </button>
       </div>
-</form>
+      <div *ngIf="categoryFlag == true">
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-warning float-right"
+          (click)="onSubmit(PostForm.value)"
+        >
+          Submit Post
+        </button>
+      </div>
+    </form>
   </div>
 </div>

@@ -7,7 +7,6 @@ var joinUs_component_1 = require("../app/pages/joinUs/joinUs.component");
 var dashboard_component_1 = require("../app/pages/dashboard/dashboard.component");
 var about_us_component_1 = require("../app/pages/about-us/about-us.component");
 var user_profile_component_1 = require("../app/pages/user-profile/user-profile.component");
-var role_1 = require("../app/models/role");
 var auth_guard_1 = require("../app/guard/auth.guard");
 var all_posts_component_1 = require("./pages/all-posts/all-posts.component");
 var my_posts_component_1 = require("./pages/my-posts/my-posts.component");
@@ -22,8 +21,7 @@ var appRoutes = [
     {
         path: 'dashboard',
         component: dashboard_component_1.DashboardComponent,
-        canActivate: [auth_guard_1.AuthGuard],
-        data: { roles: [role_1.Role.Admin] }
+        canActivate: [auth_guard_1.AuthGuard]
     },
     {
         path: 'joinUs',
@@ -54,7 +52,7 @@ var appRoutes = [
         component: add_post_component_1.AddPostComponent
     },
     {
-        path: 'post-details',
+        path: 'post-details/:postId',
         component: post_details_component_1.PostDetailsComponent
     },
     // otherwise redirect to home

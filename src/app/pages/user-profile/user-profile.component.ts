@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 import { MustMatch } from 'src/app/_helpers/Must Match';
 @Component({
@@ -10,65 +11,64 @@ import { MustMatch } from 'src/app/_helpers/Must Match';
 })  
 export class UserProfileComponent implements OnInit {
 
-
+ProfileForm: FormGroup;
   changePasswordForm: FormGroup;
   constructor(private userService: UserService, private toastr: ToastrService, private formBuilder: FormBuilder) { }
   ngOnInit() {
     this.onGetMyProfile()
-     
-    this.changePasswordForm = this.formBuilder.group({
-      oldPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required]
-    }, {
-      validator: MustMatch('newPassword', 'confirmPassword')
-
-    });
-
-
+    this.clearForm()
   }
-  firstName
-  lastName
-  img
-  email
-  DOB
-  job
-  education
-  bio
+  user: User = this.userService.currentUserValue;
   title = 'fileUpload';
-  images = null;
+  pic = null;
   id: string
   onGetMyProfile() {
     this.userService.myProfile().subscribe(res =>{
-    this.firstName = res.firstName
-    this.lastName = res.lastName
-    this.img = res.pic
-    this.email = res.email
-    this.DOB = res.DOB
-    this.job = res.job
-    this.bio = res.bio
-    this.education = res.education
+    this.user.firstName = res.firstName
+    this.user.lastName = res.lastName
+    this.user.pic = res.pic
+    this.user.email = res.email
+    this.user.DOB = res.DOB
+    this.user.job = res.job
+    this.user.bio = res.bio
+    this.user.education = res.education
+    this.user.summary = res.summary
+    this.user.facebook = res.facebook
+    this.user.gitHub= res.gitHub
+    this.user.linkedIn = res.linkedIn
+    this.user.address = res.address
+    this.user.city = res.city
+    this.user.country = res.country
 },  err=> {
    this.toastr.error(err)
     
-})}
+})
+console.log(this.user)}
 
 onEditProfile() {
-  this.userService.updateProfile(this.id).subscribe(res => {
-  console.log("hi")
-  }, err => {
-    this.toastr.error(err)
-    
-    }
-  )
+    this.userService.updateProfile(this.user).subscribe(res => {
+      this.toastr.success('You Update Your Profile Sucessfully')
+      }, err => {
+        this.toastr.error(err)
+        
+        }
+      )
+  
 }
 
 selectImage(event) {
   if (event.target.files.length > 0) {
     const file = event.target.files[0];
-    this.images = file;
+    this.pic = file;
+    this.userService.createAvatar(this.pic).subscribe(res=>{
+      this.toastr.success('you update your profile picture')
+    }, err=>{
+      this.toastr.error(err)
+      console.log(err)
+    }
+    )
   }
-  console.log(this.images)
+ console.log(this.pic)
 }
 
 
@@ -76,7 +76,8 @@ onChangePassword() {
   this.userService.changePass(this.changePasswordForm.value)
     .subscribe(
       res => {
-        this.toastr.success('You Change Your Password Successfuly')
+        this.toastr.success('You Change Your Password Successfully')
+        this.clearForm()
       },
       err => {
         this.toastr.error(err);
@@ -84,5 +85,15 @@ onChangePassword() {
       });
 }
 
+clearForm(){
+  this.changePasswordForm = this.formBuilder.group({
+ oldPassword: ['', [Validators.required]],
+ newPassword: ['', [Validators.required, Validators.minLength(8)]],
+ confirmPassword: ['', Validators.required]
+}, {
+ validator: MustMatch('newPassword', 'confirmPassword')
 
+});
+
+}
 }

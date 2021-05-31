@@ -15,56 +15,76 @@ var UserProfileComponent = /** @class */ (function () {
         this.userService = userService;
         this.toastr = toastr;
         this.formBuilder = formBuilder;
+        this.user = this.userService.currentUserValue;
         this.title = 'fileUpload';
-        this.images = null;
+        this.pic = null;
     }
     UserProfileComponent.prototype.ngOnInit = function () {
         this.onGetMyProfile();
+        this.clearForm();
+    };
+    UserProfileComponent.prototype.onGetMyProfile = function () {
+        var _this = this;
+        this.userService.myProfile().subscribe(function (res) {
+            _this.user.firstName = res.firstName;
+            _this.user.lastName = res.lastName;
+            _this.user.pic = res.pic;
+            _this.user.email = res.email;
+            _this.user.DOB = res.DOB;
+            _this.user.job = res.job;
+            _this.user.bio = res.bio;
+            _this.user.education = res.education;
+            _this.user.summary = res.summary;
+            _this.user.facebook = res.facebook;
+            _this.user.gitHub = res.gitHub;
+            _this.user.linkedIn = res.linkedIn;
+            _this.user.address = res.address;
+            _this.user.city = res.city;
+            _this.user.country = res.country;
+        }, function (err) {
+            _this.toastr.error(err);
+        });
+        console.log(this.user);
+    };
+    UserProfileComponent.prototype.onEditProfile = function () {
+        var _this = this;
+        this.userService.updateProfile(this.user).subscribe(function (res) {
+            _this.toastr.success('You Update Your Profile Sucessfully');
+        }, function (err) {
+            _this.toastr.error(err);
+        });
+    };
+    UserProfileComponent.prototype.selectImage = function (event) {
+        var _this = this;
+        if (event.target.files.length > 0) {
+            var file = event.target.files[0];
+            this.pic = file;
+            this.userService.createAvatar(this.pic).subscribe(function (res) {
+                _this.toastr.success('you update your profile picture');
+            }, function (err) {
+                _this.toastr.error(err);
+                console.log(err);
+            });
+        }
+        console.log(this.pic);
+    };
+    UserProfileComponent.prototype.onChangePassword = function () {
+        var _this = this;
+        this.userService.changePass(this.changePasswordForm.value)
+            .subscribe(function (res) {
+            _this.toastr.success('You Change Your Password Successfully');
+            _this.clearForm();
+        }, function (err) {
+            _this.toastr.error(err);
+        });
+    };
+    UserProfileComponent.prototype.clearForm = function () {
         this.changePasswordForm = this.formBuilder.group({
             oldPassword: ['', [forms_1.Validators.required]],
             newPassword: ['', [forms_1.Validators.required, forms_1.Validators.minLength(8)]],
             confirmPassword: ['', forms_1.Validators.required]
         }, {
             validator: Must_Match_1.MustMatch('newPassword', 'confirmPassword')
-        });
-    };
-    UserProfileComponent.prototype.onGetMyProfile = function () {
-        var _this = this;
-        this.userService.myProfile().subscribe(function (res) {
-            _this.firstName = res.firstName;
-            _this.lastName = res.lastName;
-            _this.img = res.pic;
-            _this.email = res.email;
-            _this.DOB = res.DOB;
-            _this.job = res.job;
-            _this.bio = res.bio;
-            _this.education = res.education;
-        }, function (err) {
-            _this.toastr.error(err);
-        });
-    };
-    UserProfileComponent.prototype.onEditProfile = function () {
-        var _this = this;
-        this.userService.updateProfile(this.id).subscribe(function (res) {
-            console.log("hi");
-        }, function (err) {
-            _this.toastr.error(err);
-        });
-    };
-    UserProfileComponent.prototype.selectImage = function (event) {
-        if (event.target.files.length > 0) {
-            var file = event.target.files[0];
-            this.images = file;
-        }
-        console.log(this.images);
-    };
-    UserProfileComponent.prototype.onChangePassword = function () {
-        var _this = this;
-        this.userService.changePass(this.changePasswordForm.value)
-            .subscribe(function (res) {
-            _this.toastr.success('You Change Your Password Successfuly');
-        }, function (err) {
-            _this.toastr.error(err);
         });
     };
     UserProfileComponent = __decorate([

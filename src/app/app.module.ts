@@ -35,6 +35,8 @@ import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.c
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import { CommentComponent } from './pages/comment/comment.component';
+import { FavouriteComponent } from './pages/favourite/favourite.component';
 
 @NgModule({
   imports: [
@@ -61,7 +63,7 @@ import { ChatComponent } from './pages/chat/chat.component';
     MatToolbarModule, 
     FlexLayoutModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-center-center'
+      positionClass: 'toast-top-right'
     })
   ],
   declarations: [
@@ -78,6 +80,8 @@ import { ChatComponent } from './pages/chat/chat.component';
     ForgetpasswordComponent,
     PostDetailsComponent,
     ChatComponent,
+    CommentComponent,
+    FavouriteComponent,
       ], providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

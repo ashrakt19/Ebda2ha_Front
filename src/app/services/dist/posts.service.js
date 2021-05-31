@@ -8,22 +8,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.PostsService = void 0;
 var core_1 = require("@angular/core");
+var rxjs_1 = require("rxjs");
 var PostsService = /** @class */ (function () {
     function PostsService(http) {
         this.http = http;
         this.SERVER_URL = 'http://localhost:3000';
+        this.currentPostSubject = new rxjs_1.BehaviorSubject(JSON.parse(localStorage.getItem('currentPost')));
+        this.currentPost = this.currentPostSubject.asObservable();
     }
+    Object.defineProperty(PostsService.prototype, "currentPostValue", {
+        get: function () {
+            return this.currentPostSubject.value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    //done
     PostsService.prototype.createPost = function (post) {
-        return this.http.post(this.SERVER_URL + '/post/', { post: post });
+        return this.http.post(this.SERVER_URL + '/post/', post);
     };
-    //   getposts(config: Config): Observable<Post[]> {
-    //     let qs = ''
-    //     qs += (config.currentPage ? '&pageNo=' + config.currentPage : '')
-    //     qs += (config.itemsPerPage ? '&size=' + config.itemsPerPage : '')
-    //     return this.http.get<Post[]>(this.SERVER_URL + '/post/?' + qs);
-    //   }
-    PostsService.prototype.getAllPost = function (Id) {
-        return this.http.get(this.SERVER_URL + '/post/' + Id);
+    // done
+    PostsService.prototype.getAllPost = function (config) {
+        var qs = '';
+        qs += (config.currentPage ? '?page=' + config.currentPage : '');
+        qs += (config.itemsPerPage ? '&size=' + config.itemsPerPage : '');
+        return this.http.get(this.SERVER_URL + '/post' + qs);
+    };
+    PostsService.prototype.updatePost = function (id, post) {
+        return this.http.put(this.SERVER_URL + '/posts/:postId', { id: id, post: post });
+    };
+    PostsService.prototype.findPost = function (postId) {
+        return this.http.get(this.SERVER_URL + '/post/' + postId);
     };
     PostsService = __decorate([
         core_1.Injectable({

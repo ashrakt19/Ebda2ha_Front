@@ -9,32 +9,42 @@ exports.__esModule = true;
 exports.MyPostsComponent = void 0;
 var core_1 = require("@angular/core");
 var add_post_component_1 = require("../add-post/add-post.component");
+var comment_component_1 = require("../comment/comment.component");
 var MyPostsComponent = /** @class */ (function () {
-    function MyPostsComponent(dialog) {
+    function MyPostsComponent(dialog, postService, userService) {
         this.dialog = dialog;
-        this.config = {
-            itemsPerPage: 6,
-            currentPage: 1,
-            totalItems: 6
-        };
+        this.postService = postService;
+        this.userService = userService;
     }
     MyPostsComponent.prototype.ngOnInit = function () {
-    };
-    MyPostsComponent.prototype.getposts = function () {
+        this.listMyPosts();
     };
     MyPostsComponent.prototype.openAdd = function () {
         var _this = this;
         var dialogRef = this.dialog.open(add_post_component_1.AddPostComponent, {
             width: '650px',
+            minHeight: '200px',
+            maxHeight: '700px'
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            _this.listMyPosts();
+        });
+    };
+    MyPostsComponent.prototype.openAddComment = function () {
+        var dialogRef = this.dialog.open(comment_component_1.CommentComponent, {
+            width: '650px',
             minHeight: '310px',
             maxHeight: '900px'
         });
         dialogRef.afterClosed().subscribe(function (result) {
-            _this.getposts();
         });
     };
-    MyPostsComponent.prototype.onPageChange = function (event) {
-        this.config.currentPage = event;
+    MyPostsComponent.prototype.listMyPosts = function () {
+        var _this = this;
+        this.userService.myProfile().subscribe(function (res) {
+            _this.posts = res.posts;
+            console.log(_this.posts);
+        });
     };
     MyPostsComponent = __decorate([
         core_1.Component({

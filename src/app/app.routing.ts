@@ -21,7 +21,7 @@ const appRoutes: Routes = [
       path: 'dashboard', 
       component: DashboardComponent, 
       canActivate: [AuthGuard], 
-      data: { roles: [Role.Admin] } 
+    //   data: { roles: [Role.Admin] } 
   },
   { 
       path: 'joinUs', 
@@ -52,7 +52,7 @@ canActivate: [AuthGuard]
     component: AddPostComponent,
 },
 { 
-    path: 'post-details', 
+    path: 'post-details/:postId', 
     component: PostDetailsComponent,
 },
 

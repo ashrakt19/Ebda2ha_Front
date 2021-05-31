@@ -26,8 +26,11 @@ var UserService = /** @class */ (function () {
     UserService.prototype.myProfile = function () {
         return this.http.get(this.SERVER_URL + '/profile');
     };
-    UserService.prototype.updateProfile = function (id) {
-        return this.http.put(this.SERVER_URL + '/profile/updateProfile', { id: id });
+    UserService.prototype.createAvatar = function (pic) {
+        return this.http.post(this.SERVER_URL + 'profile/avatar', { pic: pic });
+    };
+    UserService.prototype.updateProfile = function (user) {
+        return this.http.put(this.SERVER_URL + '/profile/updateProfile', user);
     };
     UserService.prototype.changePass = function (changepassword) {
         return this.http.put(this.SERVER_URL + '/profile/changePass', changepassword);

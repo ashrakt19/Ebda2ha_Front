@@ -43,6 +43,8 @@ var forgetpassword_component_1 = require("./pages/forgetpassword/forgetpassword.
 var ngx_pagination_1 = require("ngx-pagination");
 var post_details_component_1 = require("./pages/post-details/post-details.component");
 var chat_component_1 = require("./pages/chat/chat.component");
+var comment_component_1 = require("./pages/comment/comment.component");
+var favourite_component_1 = require("./pages/favourite/favourite.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -72,7 +74,7 @@ var AppModule = /** @class */ (function () {
                 toolbar_1.MatToolbarModule,
                 flex_layout_1.FlexLayoutModule,
                 ngx_toastr_1.ToastrModule.forRoot({
-                    positionClass: 'toast-center-center'
+                    positionClass: 'toast-top-right'
                 })
             ],
             declarations: [
@@ -89,6 +91,8 @@ var AppModule = /** @class */ (function () {
                 forgetpassword_component_1.ForgetpasswordComponent,
                 post_details_component_1.PostDetailsComponent,
                 chat_component_1.ChatComponent,
+                comment_component_1.CommentComponent,
+                favourite_component_1.FavouriteComponent,
             ], providers: [
                 { provide: http_1.HTTP_INTERCEPTORS, useClass: jwt_interceptor_1.JwtInterceptor, multi: true },
                 { provide: http_1.HTTP_INTERCEPTORS, useClass: error_Interceptor_1.ErrorInterceptor, multi: true },

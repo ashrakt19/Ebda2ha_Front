@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from 'src/app/models/Post';
+import { User } from 'src/app/models/User';
+import { PostsService } from 'src/app/services/posts.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,9 +12,25 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class PostDetailsComponent implements OnInit {
 
-  constructor(public userService: UserService) { }
+  constructor( private postService: PostsService , private userService: UserService , private _Activatedroute: ActivatedRoute, private _router: Router) {
 
-  ngOnInit(): void {
   }
+ post: Post;
+ user: User = this.userService.currentUserValue;
+
+ postId: string;
+  ngOnInit() {
+    this.postId = this._Activatedroute.snapshot.paramMap.get("postId");
+    this.getPost()
+  }
+
+  getPost() {
+    // debugger
+    this.postService.findPost(this.postId).subscribe(res=>{
+     this.post = res
+     console.log(this.post)
+    })
+  }
+
 
 }

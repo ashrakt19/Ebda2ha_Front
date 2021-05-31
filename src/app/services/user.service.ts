@@ -19,11 +19,16 @@ export class UserService {
     return this.currentUserSubject.value;
   }
 
-  myProfile() {
+  myProfile():Observable<User> {
     return this.http.get<User>(this.SERVER_URL + '/profile')
   }
-  updateProfile(id: string){
-    return this.http.put<User>(this.SERVER_URL + '/profile/updateProfile', {id})
+
+  createAvatar(pic:string){
+    return this.http.post<User>(this.SERVER_URL+'profile/avatar',{pic})
+
+  }
+  updateProfile(user:User){
+    return this.http.put<User>(this.SERVER_URL + '/profile/updateProfile', user)
   }
   changePass(changepassword: ChangePassword){
     return this.http.put<any>(this.SERVER_URL+'/profile/changePass',changepassword)

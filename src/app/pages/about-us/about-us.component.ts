@@ -57,7 +57,8 @@ export class AboutUsComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res)
-
+          this.toastr.success('Your Feedback Sent Successfully!')
+          location.reload(true);
         },
        err=>{
          this.toastr.error(err)

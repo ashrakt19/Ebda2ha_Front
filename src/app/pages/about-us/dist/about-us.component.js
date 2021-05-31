@@ -53,6 +53,8 @@ var AboutUsComponent = /** @class */ (function () {
         this.aboutusService.sendContactMail(this.contactFrom.value)
             .subscribe(function (res) {
             console.log(res);
+            _this.toastr.success('Your Feedback Sent Successfully!');
+            location.reload(true);
         }, function (err) {
             _this.toastr.error(err);
         });

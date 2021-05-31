@@ -1,24 +1,22 @@
+import { Post } from "./Post";
+
 export class User {
     token: String;
+    id?: string;
     firstName: {
-        type: String ,
-        required: true
+        type: String 
     };
     lastName: {
-        type: String ,
-        required: true
+        type: String 
     };
     email: {
-        type: String,
-        required: true
+        type: String
     };
     password: {
-        type: String,
-        required: true
+        type: String
     };
     role: {
-        type: String,
-        required: true,
+        type: String
     };
     pic: {
         type: String,
@@ -42,32 +40,38 @@ export class User {
     summary: {
         type: String
     };
-    socialLinks: {
         facebook: {
             type: String,
-        },
+        };
         linkedIn: {
             type: String,
-        },
+        };
         gitHub: {
             type: String
-        }
-    };
+        };
+        address: {
+            type: String,
+        };
+        city: {
+            type: String,
+        };
+        country: {
+            type: String
+        };
     verified: {
         type: Boolean,
         default: false
     };
     verificationCode: {
-        type:String,
-        required:false
+        type:String
     };
     resetPassToken: {
-        type:String,
-        required:false
+        type:String
     }
     interests: [{
         type: String
     }]
+    posts: Post;
 }; {
     timestamps: true
 };
