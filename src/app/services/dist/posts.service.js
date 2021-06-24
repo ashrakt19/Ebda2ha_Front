@@ -34,11 +34,23 @@ var PostsService = /** @class */ (function () {
         qs += (config.itemsPerPage ? '&size=' + config.itemsPerPage : '');
         return this.http.get(this.SERVER_URL + '/post' + qs);
     };
-    PostsService.prototype.updatePost = function (id, post) {
-        return this.http.put(this.SERVER_URL + '/posts/:postId', { id: id, post: post });
+    PostsService.prototype.updatePost = function (post, postId) {
+        return this.http.put(this.SERVER_URL + '/post/' + postId, post);
+    };
+    PostsService.prototype.deletePost = function (postId) {
+        return this.http["delete"](this.SERVER_URL + '/post/' + postId);
+    };
+    PostsService.prototype.filter = function (categoryId) {
+        return this.http.get(this.SERVER_URL + '/post/filter?categoryId=' + categoryId);
+    };
+    PostsService.prototype.search = function (key) {
+        return this.http.get(this.SERVER_URL + '/post/search?key=' + key);
     };
     PostsService.prototype.findPost = function (postId) {
         return this.http.get(this.SERVER_URL + '/post/' + postId);
+    };
+    PostsService.prototype.getAllCategory = function () {
+        return this.http.get(this.SERVER_URL + '/category/');
     };
     PostsService = __decorate([
         core_1.Injectable({

@@ -9,11 +9,14 @@ exports.__esModule = true;
 exports.PostDetailsComponent = void 0;
 var core_1 = require("@angular/core");
 var PostDetailsComponent = /** @class */ (function () {
-    function PostDetailsComponent(postService, userService, _Activatedroute, _router) {
+    function PostDetailsComponent(router, toastr, postService, userService, _Activatedroute, _router) {
+        this.router = router;
+        this.toastr = toastr;
         this.postService = postService;
         this.userService = userService;
         this._Activatedroute = _Activatedroute;
         this._router = _router;
+        this.postloaded = false;
         this.user = this.userService.currentUserValue;
     }
     PostDetailsComponent.prototype.ngOnInit = function () {
@@ -22,10 +25,27 @@ var PostDetailsComponent = /** @class */ (function () {
     };
     PostDetailsComponent.prototype.getPost = function () {
         var _this = this;
-        // debugger
         this.postService.findPost(this.postId).subscribe(function (res) {
-            _this.post = res;
+            _this.post = res.post;
+            _this.postloaded = true;
             console.log(_this.post);
+        });
+    };
+    PostDetailsComponent.prototype.onEditPost = function () {
+        var _this = this;
+        this.postService.updatePost(this.post, this.post._id).subscribe(function (res) {
+            _this.toastr.success('You Update Your Post Sucessfully');
+        }, function (err) {
+            _this.toastr.error(err);
+        });
+    };
+    PostDetailsComponent.prototype.onDeletePost = function () {
+        var _this = this;
+        this.postService.deletePost(this.post._id).subscribe(function (res) {
+            _this.toastr.success('your post deleted successfully');
+            _this.router.navigate(['/all-posts']);
+        }, function (err) {
+            _this.toastr.error(err);
         });
     };
     PostDetailsComponent = __decorate([

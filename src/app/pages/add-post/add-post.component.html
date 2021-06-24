@@ -268,31 +268,18 @@
                 This details is too short, Help us by more details please .
               </span>
             </div>
-            <!-- <div class="col-lg-12">
-              <div ngbDropdown>
-                <button
-                  class="btn btn-default"
-                  [ngClass]="{
-                    'btn-warning animated pulse delay-1s infinite':
-                      selectedFilter == 'Filter'
-                  }"
-                  id="dropdownBasic1"
-                  ngbDropdownToggle
+            <div class="col-lg-6">
+              <select class="form-control"  formControlName="categoryId">
+                <option value="null">Select Category of Your StartUp</option>
+                <option
+                  *ngFor="let summary of summaries"
+                  value="{{ summary._id }}"
                 >
-                  {{ selectedFilter }}
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button
-                    ngbDropdownItem
-                    *ngFor="let filter of filters"
-                    (click)="setFilter(filter)"
-                  >
-                    {{ filter }}
-                  </button>
-                </div>
-              </div>
-            </div> -->
-          </div>
+                  {{ summary.name }}
+                </option>
+              </select>
+            </div>
+            </div>
 
           <div class="row" *ngIf="selectedCateogry == 'Product Form'">
             <div class="col-lg-6">
@@ -520,6 +507,18 @@
               >
                 This details is too short, Help us by more details please .
               </span>
+         
+            </div>
+            <div class="col-lg-6">
+              <select class="form-control"  formControlName="categoryId">
+                <option value="null">Select Category of Your Product</option>
+                <option
+                  *ngFor="let summary of summaries"
+                  value="{{ summary._id }}"
+                >
+                  {{ summary.name }}
+                </option>
+              </select>
             </div>
           </div>
         </div>

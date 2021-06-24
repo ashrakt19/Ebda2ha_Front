@@ -127,66 +127,120 @@
   <div class="text-center">
     <h2 class="section-heading  text-light">Startups You Can Fund</h2>
 </div>
+<!-- <div class="row">
+  <div class="col-xl-3 col-lg-6">
+    <div class="card-group">
+      <div class="card">
+        <img class="card-img-top"
+          src="../../../assets/aboutus.jpg"
+          
+          alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          
+        </div>
+        <a routerLink="/post-details" class="btn text-center btn-warning text-white">See full post <i class="fas fa-eye"></i> </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6">
+    <div class="card-group">
+      <div class="card">
+        <img class="card-img-top"
+          src="../../../assets/aboutus.jpg"
+          
+          alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          
+        </div>
+        <a routerLink="/post-details" class="btn text-center btn-warning text-white">See full post <i class="fas fa-eye"></i> </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6">
+    <div class="card-group">
+      <div class="card">
+        <img class="card-img-top"
+          src="../../../assets/aboutus.jpg"
+          
+          alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+           </div>
+        <a routerLink="/post-details" class="btn text-center btn-warning text-white">See full post <i class="fas fa-eye"></i> </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6">
+    <div class="card-group">
+      <div class="card">
+        <img class="card-img-top"
+          src="../../../assets/aboutus.jpg"
+          
+          alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+           </div>
+        <a routerLink="/post-details" class="btn text-center btn-warning text-white">See full post <i class="fas fa-eye"></i> </a>
+      </div>
+    </div>
+  </div>
+</div> -->
 <div class="row">
-  <div class="col-xl-3 col-lg-6">
-    <div class="card-group">
+  <div class="col-xl-4 col-lg-6" *ngFor="let post of posts | paginate: config">
+    <div class="card-group" *ngIf="post.category == ['Startup Form']">
       <div class="card">
-        <img class="card-img-top"
+        <img
+          class="card-img-top"
           src="../../../assets/aboutus.jpg"
-          
-          alt="Card image cap">
+          alt="Card image cap"
+        />
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          
+          <h1 class="card-title">{{ post.StartupName }}</h1>
+          <h3 class="card-text">Post Target: {{ post.Posttype }}</h3>
+          <h3 class="card-text">Category: {{post.categoryId.name}}</h3>
+          <h3 class="card-text">Phone Number: {{ post.phone }}</h3>
+          <h3 class="card-text">
+            Facebook Page: {{ post.facebookpage }}
+          </h3>
+          <h3 class="card-text">Website Link: {{ post.websitelink }}</h3>
+          <h3 class="card-text">Description: {{ post.description }}</h3>
+          <h3 class="card-text">Location: {{ post.addressLine }}</h3>
+         <a   routerLink="/post-details/{{ post._id }}" class="btn btn-default text-center">See Post <i class="fas fa-eye"></i> </a>
+          <button class="btn btn-default text-center" (click)="openAddComment()">Add Comment</button>
+
         </div>
-        <a routerLink="/post-details" class="btn text-center btn-warning text-white">See full post <i class="fas fa-eye"></i> </a>
       </div>
     </div>
-  </div>
-  <div class="col-xl-3 col-lg-6">
-    <div class="card-group">
+    <div class="card-group" *ngIf="post.category == ['Product Form']">
       <div class="card">
-        <img class="card-img-top"
+        <img
+          class="card-img-top"
           src="../../../assets/aboutus.jpg"
-          
-          alt="Card image cap">
+          alt="Card image cap"
+        />
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          
+          <h1 class="card-title">{{ post.StartupName }}</h1>
+          <h3 class="card-text">Product Name: {{ post.Productname }}</h3>
+          <h3 class="card-text">Category: {{post.categoryId.name}}</h3>
+          <h3 class="card-text">Price: {{ post.Price }}</h3>
+          <h3 class="card-text">Phone Number: {{ post.phone }}</h3>
+          <h3 class="card-text">
+            Facebook Page: {{ post.facebookpage }}
+          </h3>
+          <h3 class="card-text">Website Link: {{ post.websitelink }}</h3>
+          <h3 class="card-text">Description: {{ post.description }}</h3>
+          <h3 class="card-text">Location: {{ post.addressLine }}</h3>
+       
+          <a   routerLink="/post-details/{{ post._id }}" class="btn btn-default text-center">See Post <i class="fas fa-eye"></i> </a>
+          <button class="btn btn-default text-center" (click)="openAddComment()">Add Comment</button>
+
         </div>
-        <a routerLink="/post-details" class="btn text-center btn-warning text-white">See full post <i class="fas fa-eye"></i> </a>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-lg-6">
-    <div class="card-group">
-      <div class="card">
-        <img class="card-img-top"
-          src="../../../assets/aboutus.jpg"
-          
-          alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-           </div>
-        <a routerLink="/post-details" class="btn text-center btn-warning text-white">See full post <i class="fas fa-eye"></i> </a>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-lg-6">
-    <div class="card-group">
-      <div class="card">
-        <img class="card-img-top"
-          src="../../../assets/aboutus.jpg"
-          
-          alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-           </div>
-        <a routerLink="/post-details" class="btn text-center btn-warning text-white">See full post <i class="fas fa-eye"></i> </a>
       </div>
     </div>
   </div>

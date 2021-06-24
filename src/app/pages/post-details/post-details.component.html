@@ -1,20 +1,22 @@
 <app-navbar></app-navbar>
 <section class="page-section bg-default">
-  <div class="container">
+  <div class="container" *ngIf="postloaded==true">
     <div class="card bg-secondary shadow">
       <div class="card-header bg-white border-0">
         <div class="row align-items-center">
           <div class="col-8">
-            <h3 class="mb-0">Posted By: </h3>
+            <h3 class="mb-0">Posted By:{{post.createdBy.firstName}} {{post.createdBy.lastName}} </h3>
           </div>
           <div class="col-4 text-right">
             <button
               class="btn btn-warning"
               *ngIf="user"
+              (click)="onEditPost()"
             >
               Edit Post
             </button>
-            <button class="btn btn-danger" *ngIf="user">
+            <button class="btn btn-danger" *ngIf="user"
+            (click)="onDeletePost()">
               Delete Post
             </button>
             <button
@@ -26,14 +28,250 @@
           </div>
         </div>
       </div>
-      <div class="card-body">
-        <!-- <h1 class="card-title">Startup Name: {{post.StartupName}}</h1> -->
-        <h3 class="card-text">Category: lalalala</h3>
-        <h3 class="card-text">Content: lalalala</h3>
-        <!-- <h3 class="card-text">Phone: {{post.phone}}</h3>
-        <h3 class="card-text">Location: {{post.addressLine}}</h3> -->
-        <h3 class="card-text">Description: alalala</h3>
+      <div class="row" *ngIf="post.category == ['Product Form']">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-StartupName"
+            >StartUp Name</label
+          >
+          <input
+            type="text"
+            id="input-StartupName"
+           [(ngModel)]="post.StartupName"
+            name="StartupName"
+            class="form-control form-control-alternative"
+          />
+        </div>
       </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-Productname"
+            >Product Name</label
+          >
+          <input
+            type="text"
+            id="input-Productname"
+            [(ngModel)]="post.Productname"
+            name="Productname"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-summry"
+            >Category</label
+          >
+          <input
+            type="text"
+            id="input-summry"
+            [(ngModel)]="post.categoryId.name"
+           
+            name="summry"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-Phone"
+            >Phone Number</label
+          >
+          <input
+            type="text"
+            id="input-Phone"
+            [(ngModel)]="post.phone"
+            name="Phone"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-addressLine"
+            >Address</label
+          >
+          <input
+            type="text"
+            id="input-addressLine"
+            [(ngModel)]="post.addressLine"
+            name="addressLine"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-description"
+            >Description</label
+          >
+          <input
+            type="text"
+            id="input-description"
+            [(ngModel)]="post.description"
+            name="description"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-facebookpage"
+            >Facebook Page </label
+          >
+          <input
+            type="text"
+            id="input-facebookpage"
+            [(ngModel)]="post.facebookpage"
+            name="facebookpage"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-websitelink"
+            >Website Link</label
+          >
+          <input
+            type="text"
+            id="input-websitelink"
+            [(ngModel)]="post.websitelink"
+            name="websitelink"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-Price"
+            >Price</label
+          >
+          <input
+            type="text"
+            id="input-Price"
+            [(ngModel)]="post.Price"
+            name="Price"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="post.category == ['Startup Form']">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-StartupName"
+            >StartUp Name</label
+          >
+          <input
+            type="text"
+            id="input-StartupName"
+           [(ngModel)]="post.StartupName"
+            name="StartupName"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-summry"
+            >Category</label
+          >
+          <input
+            type="text"
+            id="input-summry"
+            [(ngModel)]="post.categoryId.name"
+            value="{{ post.categoryId._id }}"
+            name="summry"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-Phone"
+            >Phone Number</label
+          >
+          <input
+            type="text"
+            id="input-Phone"
+            [(ngModel)]="post.phone"
+            name="Phone"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-addressLine"
+            >Address</label
+          >
+          <input
+            type="text"
+            id="input-addressLine"
+            [(ngModel)]="post.addressLine"
+            name="addressLine"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-description"
+            >Description</label
+          >
+          <input
+            type="text"
+            id="input-description"
+            [(ngModel)]="post.description"
+            name="description"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-Posttype"
+            >Post Target</label
+          >
+          <input
+            type="text"
+            id="input-Posttype"
+            [(ngModel)]="post.Posttype"
+            name="Posttype"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-facebookpage"
+            >Facebook Page </label
+          >
+          <input
+            type="text"
+            id="input-facebookpage"
+            [(ngModel)]="post.facebookpage"
+            name="facebookpage"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-websitelink"
+            >Website Link</label
+          >
+          <input
+            type="text"
+            id="input-websitelink"
+            [(ngModel)]="post.websitelink"
+            name="websitelink"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+    </div>
       <div class="card-header bg-white border-0">
         <div class="row align-items-center">
           <div class="col-8">

@@ -1,1 +1,84 @@
-<p>chat works!</p>
+<app-navbar></app-navbar>
+<div class="container-fluid bg-default">
+    
+    <div class="text-center">Messaging</div>
+    <div class="row">
+        
+        <div class="col-md-4">
+            
+            
+            <div class="user-list-card">
+                <div class="text-center" *ngIf="userme">
+                    <img src="{{userme.pic}}" class="avatar" />
+                    <h2>Chats</h2>
+                </div>
+              
+                <div class="user-card" [ngClass]="user?.firstName === selectedUser?.firstName && 'active'"
+                *ngFor="let user of userList" (click)="selectUserHandler(user?.firstName)">
+                
+                <img src="{{user.pic}}" alt="{{user?.firstName}}" class="avatar" />
+                <p class="username">{{user?.firstName}} {{user?.lastName}}</p>
+                
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="col-md-8">
+        
+        <div class="chat-container">
+            <ng-container *ngIf="selectedUser">
+                <div class="chat-header">
+                    
+                    <img src="{{selectedUser.pic}}" alt="{{selectedUser?.firstName}}" class="avatar" />
+                    <p class="username">{{selectedUser?.firstName}} {{selectedUser?.lastName}}</p>
+                    
+                </div>
+                <div class="chat-body">
+                    <div *ngFor="let message of messageArray"
+                    [ngClass]="message?.user === currentUser?.firstName && 'same-user'">
+                    <div *ngIf="
+                    message?.user !== currentUser?.firstName;
+                    then incoming_msg;
+                    else outgoing_msg
+                    "></div>
+                    <ng-template #incoming_msg>
+                        <p class="message-container">{{ message?.body }}</p>
+                    </ng-template>
+                    <ng-template #outgoing_msg>
+                        <p class="message-container">{{ message?.body }}</p>
+                    </ng-template>
+                    
+                    <!-- <p class="message-container">{{message?.body}}</p> -->
+                </div>
+            </div>
+            
+            <div class="chat-footer">
+                
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group mb-0">
+                            <input type="text" placeholder="Type a message" class="form-control" [(ngModel)]="body"
+                            (keyup)="$event.keyCode === 13 && sendMessage()" />
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2 text-center align-self-center">
+                        <button class="btn btn-primary btn-sm px-3" (click)="sendMessage()">Send
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </ng-container>
+    </div>
+    
+</div>
+
+</div>
+
+</div>
+<div class="bg-default">
+    <app-footer></app-footer>
+
+</div>

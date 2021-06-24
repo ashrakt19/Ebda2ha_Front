@@ -2,7 +2,8 @@ import { Post } from "./Post";
 
 export class User {
     token: String;
-    id?: string;
+    // _id: string;
+    idd: string
     firstName: {
         type: String 
     };

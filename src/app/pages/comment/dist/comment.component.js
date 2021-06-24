@@ -10,10 +10,13 @@ exports.CommentComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var CommentComponent = /** @class */ (function () {
-    function CommentComponent(formBuilder, commentService, toastr) {
+    function CommentComponent(formBuilder, userService, commentService, toastr) {
         this.formBuilder = formBuilder;
+        this.userService = userService;
         this.commentService = commentService;
         this.toastr = toastr;
+        this.user = this.userService.currentUserValue;
+        this.userId = this.user.idd;
     }
     CommentComponent.prototype.ngOnInit = function () {
         this.commentForm = this.formBuilder.group({
@@ -22,12 +25,14 @@ var CommentComponent = /** @class */ (function () {
     };
     CommentComponent.prototype.AddComment = function () {
         var _this = this;
-        this.commentService.createcomment(this.commentForm.value).subscribe(function (res) {
+        this.commentService.createcomment(this.commentForm.value, this.postId).subscribe(function (res) {
             console.log('created');
         }, function (err) {
             _this.toastr.error(err);
         });
         console.log(this.commentForm.value);
+        console.log(this.postId);
+        console.log(this.userId);
     };
     CommentComponent = __decorate([
         core_1.Component({

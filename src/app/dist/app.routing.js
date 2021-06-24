@@ -13,6 +13,7 @@ var my_posts_component_1 = require("./pages/my-posts/my-posts.component");
 var forgetpassword_component_1 = require("./pages/forgetpassword/forgetpassword.component");
 var add_post_component_1 = require("./pages/add-post/add-post.component");
 var post_details_component_1 = require("./pages/post-details/post-details.component");
+var chat_component_1 = require("./pages/chat/chat.component");
 var appRoutes = [
     {
         path: '',
@@ -32,7 +33,8 @@ var appRoutes = [
         component: about_us_component_1.AboutUsComponent
     }, {
         path: 'all-posts',
-        component: all_posts_component_1.AllPostsComponent
+        component: all_posts_component_1.AllPostsComponent,
+        canActivate: [auth_guard_1.AuthGuard]
     }, {
         path: 'my-posts',
         component: my_posts_component_1.MyPostsComponent,
@@ -49,11 +51,16 @@ var appRoutes = [
     },
     {
         path: 'add-post',
-        component: add_post_component_1.AddPostComponent
+        component: add_post_component_1.AddPostComponent,
+        canActivate: [auth_guard_1.AuthGuard]
     },
     {
         path: 'post-details/:postId',
         component: post_details_component_1.PostDetailsComponent
+    },
+    {
+        path: 'chat/:useridd',
+        component: chat_component_1.ChatComponent
     },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

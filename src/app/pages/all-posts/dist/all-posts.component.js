@@ -11,17 +11,20 @@ var core_1 = require("@angular/core");
 var add_post_component_1 = require("../add-post/add-post.component");
 var comment_component_1 = require("../comment/comment.component");
 var AllPostsComponent = /** @class */ (function () {
-    function AllPostsComponent(dialog, postService) {
+    function AllPostsComponent(dialog, postService, commentService) {
         this.dialog = dialog;
         this.postService = postService;
+        this.commentService = commentService;
         this.config = {
             itemsPerPage: 6,
             currentPage: 1,
             totalItems: 100
         };
+        this.summaries = [];
     }
     AllPostsComponent.prototype.ngOnInit = function () {
         this.getposts();
+        this.getCategory();
     };
     AllPostsComponent.prototype.openAdd = function () {
         var _this = this;
@@ -46,14 +49,40 @@ var AllPostsComponent = /** @class */ (function () {
     AllPostsComponent.prototype.getposts = function () {
         var _this = this;
         this.postService.getAllPost(this.config).subscribe(function (res) {
-            // debugger
-            console.log(res);
+            // console.log(res)
             _this.posts = res.posts;
         });
     };
     AllPostsComponent.prototype.onPageChange = function (event) {
         this.config.currentPage = event;
         this.getposts();
+    };
+    AllPostsComponent.prototype.search = function (value) {
+        this.onSearch(value);
+    };
+    AllPostsComponent.prototype.onSearch = function (key) {
+        var _this = this;
+        this.postService.search(key).subscribe(function (res) {
+            // console.log(this.posts)
+            _this.posts = res.posts;
+        });
+    };
+    AllPostsComponent.prototype.getCategory = function () {
+        var _this = this;
+        this.postService.getAllCategory().subscribe(function (res) {
+            _this.summaries = res.categories;
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    AllPostsComponent.prototype.filter = function (categoryId) {
+        var _this = this;
+        if (categoryId !== "0") {
+            this.postService.filter(categoryId).subscribe(function (res) {
+                _this.posts = res.posts;
+                // console.log(this.posts)
+            });
+        }
     };
     AllPostsComponent = __decorate([
         core_1.Component({

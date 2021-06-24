@@ -34,7 +34,7 @@
                 <div class="card-body">
                   <h1 class="card-title">{{ post.StartupName }}</h1>
                   <h3 class="card-text">Post Target: {{ post.Posttype }}</h3>
-                  <h3 class="card-text">Category:</h3>
+                  <h3 class="card-text">Category: {{post.categoryId.name}}</h3>
                   <h3 class="card-text">Phone Number: {{ post.phone }}</h3>
                   <h3 class="card-text">
                     Facebook Page: {{ post.facebookpage }}
@@ -44,6 +44,9 @@
                   </h3>
                   <h3 class="card-text">Description: {{ post.description }}</h3>
                   <h3 class="card-text">Location: {{ post.addressLine }}</h3>
+                  <a  routerLink="/post-details/{{post._id}}" class="btn btn-default text-center">See Post <i class="fas fa-eye"></i> </a>
+                  <button class="btn btn-default text-center">Add Comment</button>
+              
                 </div>
               </div>
             </div>
@@ -59,6 +62,7 @@
                   <h3 class="card-text">
                     Product Name: {{ post.Productname }}
                   </h3>
+                  <h3 class="card-text">Category: {{post.categoryId.name}}</h3>
                   <h3 class="card-text">Price: {{ post.Price }}</h3>
                   <h3 class="card-text">Phone Number: {{ post.phone }}</h3>
                   <h3 class="card-text">

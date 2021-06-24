@@ -1,7 +1,7 @@
+import { Summry } from "./Summry";
 import { User } from "./User";
-
 export class Post {
-    _id: String;
+    _id: string;
     StartupName: {
         type: String,
         required: true
@@ -39,14 +39,11 @@ export class Post {
         type: Boolean,
         default: false
     };
-    // Category:{
-    //     type: String
-    // }
-    // categoryId: {
-    //     required: true,
-    //     ref: 'Category'
-    // };
-    createdBy: User;
+    createdBy: User
+    comments: Comment[]
+    categoryId: Summry;
 }; {
     timestamps: true
 }
+
+

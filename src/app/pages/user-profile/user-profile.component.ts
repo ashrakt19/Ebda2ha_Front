@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RequestOptions } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
@@ -17,11 +18,11 @@ ProfileForm: FormGroup;
   ngOnInit() {
     this.onGetMyProfile()
     this.clearForm()
+    console.log(this.userService.currentUserValue)
   }
   user: User = this.userService.currentUserValue;
-  title = 'fileUpload';
+  userId = this.userService.currentUserValue.idd;
   pic = null;
-  id: string
   onGetMyProfile() {
     this.userService.myProfile().subscribe(res =>{
     this.user.firstName = res.firstName
@@ -39,11 +40,14 @@ ProfileForm: FormGroup;
     this.user.address = res.address
     this.user.city = res.city
     this.user.country = res.country
+    this.user.idd = res.idd
+    // debugger
+    console.log(this.user.idd)
 },  err=> {
    this.toastr.error(err)
     
 })
-console.log(this.user)}
+}
 
 onEditProfile() {
     this.userService.updateProfile(this.user).subscribe(res => {
@@ -53,22 +57,23 @@ onEditProfile() {
         
         }
       )
-  
 }
+
 
 selectImage(event) {
   if (event.target.files.length > 0) {
     const file = event.target.files[0];
     this.pic = file;
-    this.userService.createAvatar(this.pic).subscribe(res=>{
-      this.toastr.success('you update your profile picture')
-    }, err=>{
-      this.toastr.error(err)
-      console.log(err)
-    }
-    )
+    const formData = new FormData();
+    formData.append('pic',this.pic,this.pic.name);
+    
+    this.userService.createAvatar(this.pic,formData).subscribe((link: any)=>{
+      this.user.pic = link.user.pic
+        this.toastr.success('you update your profile picture')
+      },err=>{
+        this.toastr.error(err)
+      })
   }
- console.log(this.pic)
 }
 
 

@@ -13,8 +13,8 @@ var CommentService = /** @class */ (function () {
         this.http = http;
         this.SERVER_URL = 'http://localhost:3000';
     }
-    CommentService.prototype.createcomment = function (content) {
-        return this.http.put(this.SERVER_URL + '/post/:postId/comment', { content: content });
+    CommentService.prototype.createcomment = function (content, postId) {
+        return this.http.post(this.SERVER_URL + '/post/' + postId + '/comment/', { content: content });
     };
     CommentService = __decorate([
         core_1.Injectable({

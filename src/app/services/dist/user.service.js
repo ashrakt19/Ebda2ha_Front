@@ -26,8 +26,8 @@ var UserService = /** @class */ (function () {
     UserService.prototype.myProfile = function () {
         return this.http.get(this.SERVER_URL + '/profile');
     };
-    UserService.prototype.createAvatar = function (pic) {
-        return this.http.post(this.SERVER_URL + 'profile/avatar', { pic: pic });
+    UserService.prototype.createAvatar = function (pic, formData) {
+        return this.http.post(this.SERVER_URL + '/profile/avatar', formData);
     };
     UserService.prototype.updateProfile = function (user) {
         return this.http.put(this.SERVER_URL + '/profile/updateProfile', user);

@@ -97,6 +97,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
         res => {
           this.router.navigate(['/user-profile']);
           this.toastr.success('You Logged In Successfully Hope You Doing Well with us!')
+          console.log(res)
         },
         err => {
           this.toastr.error(err);

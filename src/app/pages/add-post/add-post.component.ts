@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { PostsService } from 'src/app/services/posts.service';
 import { ToastrService } from 'ngx-toastr';
+import { Summry } from 'src/app/models/Summry';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -14,8 +15,6 @@ export class AddPostComponent implements OnInit {
   msg: string = 'You must specify a description thats between 20 and 500 characters';
   categories = ['Product Form', 'Startup Form'];
   selectedCateogry = 'Category';
-  // filters= ['Food','Furniture','Handmade','Technology'];
-  // selectedFilter= 'Filter';
   categoryFlag: boolean = false;
   pic: any = null
   PostForm: FormGroup
@@ -23,11 +22,12 @@ export class AddPostComponent implements OnInit {
 
 
 
+
   constructor(public dialogRef: MatDialogRef<AddPostComponent>, private fb: FormBuilder,
     private http: HttpClient, private PostService: PostsService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-
+    this.getCategory()
 
     this.PostForm = this.fb.group({
       StartupName: ['', [Validators.required]],
@@ -41,7 +41,16 @@ export class AddPostComponent implements OnInit {
       Posttype: [''],
       facebookpage: [''],
       websitelink: [''],
+      categoryId:[null,[Validators.required]] 
     });
+  }
+  summaries: Summry[] = []
+  getCategory(){
+    this.PostService.getAllCategory().subscribe( (res:any)=>{
+      this.summaries = res.categories
+    },err=>{
+      console.log(err)
+    })
   }
 
   setCategory(category: string) {
@@ -59,13 +68,6 @@ export class AddPostComponent implements OnInit {
     this.PostForm.get('Posttype').updateValueAndValidity();
 
   }
-  // setFilter(filter: string) {
-  //   this.selectedFilter = filter;
-  //   this.PostForm.patchValue({
-  //     Category: filter
-  //   })
-
-  // }
 
   onFileChange(event) {
     if (event.target.files.length > 0) {
@@ -74,6 +76,8 @@ export class AddPostComponent implements OnInit {
     }
     console.log(this.pic)
   }
+
+  
 
   onSubmit() {
     this.PostService.createPost(this.PostForm.value).subscribe(res => {
@@ -89,21 +93,5 @@ export class AddPostComponent implements OnInit {
   onCancel() {
     this.dialogRef.close();
   }
-
-  // MapToProductObject(productObject) {
-  //   const obj = {
-  //     "Price": productObject.Price,
-  //     "Productname": productObject.Productname,
-  //     "StartupName": productObject.StartupName,
-  //     "addressLine": productObject.addressLine,
-  //     "category": productObject.category,
-  //     "description": productObject.description,
-  //     "facebookpage": productObject.facebookpage,
-  //     "phone": productObject.phone,
-  //     "websitelink": productObject.websitelink
-  //   }
-  //   return obj;
-
-  // }
 
 }

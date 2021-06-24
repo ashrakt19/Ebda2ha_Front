@@ -64,12 +64,12 @@ img {
 }
 
 
-
+/* 
 h1, .h1 {
   font-size: 2.5rem;
-}
+} */
 
-h2, .h2 {
+/* h2, .h2 {
   font-size: 2rem;
 }
 
@@ -87,7 +87,7 @@ h5, .h5 {
 
 h6, .h6 {
   font-size: 1rem;
-}
+} */
 
 
 .display-4 {
@@ -2071,7 +2071,7 @@ textarea.form-control {
   }
 }
 
-.btn {
+/* .btn {
   display: inline-block;
   font-weight: 400;
   color: #212529;
@@ -2104,7 +2104,7 @@ textarea.form-control {
 }
 .btn.disabled, .btn:disabled {
   opacity: 0.65;
-}
+} */
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
@@ -8831,3 +8831,4 @@ img::-moz-selection {
     padding-bottom: auto;
   }
 }
+

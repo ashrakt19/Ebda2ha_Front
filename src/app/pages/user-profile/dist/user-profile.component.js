@@ -16,12 +16,13 @@ var UserProfileComponent = /** @class */ (function () {
         this.toastr = toastr;
         this.formBuilder = formBuilder;
         this.user = this.userService.currentUserValue;
-        this.title = 'fileUpload';
+        this.userId = this.userService.currentUserValue.idd;
         this.pic = null;
     }
     UserProfileComponent.prototype.ngOnInit = function () {
         this.onGetMyProfile();
         this.clearForm();
+        console.log(this.userService.currentUserValue);
     };
     UserProfileComponent.prototype.onGetMyProfile = function () {
         var _this = this;
@@ -41,10 +42,12 @@ var UserProfileComponent = /** @class */ (function () {
             _this.user.address = res.address;
             _this.user.city = res.city;
             _this.user.country = res.country;
+            _this.user.idd = res.idd;
+            // debugger
+            console.log(_this.user.idd);
         }, function (err) {
             _this.toastr.error(err);
         });
-        console.log(this.user);
     };
     UserProfileComponent.prototype.onEditProfile = function () {
         var _this = this;
@@ -59,14 +62,15 @@ var UserProfileComponent = /** @class */ (function () {
         if (event.target.files.length > 0) {
             var file = event.target.files[0];
             this.pic = file;
-            this.userService.createAvatar(this.pic).subscribe(function (res) {
+            var formData = new FormData();
+            formData.append('pic', this.pic, this.pic.name);
+            this.userService.createAvatar(this.pic, formData).subscribe(function (link) {
+                _this.user.pic = link.user.pic;
                 _this.toastr.success('you update your profile picture');
             }, function (err) {
                 _this.toastr.error(err);
-                console.log(err);
             });
         }
-        console.log(this.pic);
     };
     UserProfileComponent.prototype.onChangePassword = function () {
         var _this = this;

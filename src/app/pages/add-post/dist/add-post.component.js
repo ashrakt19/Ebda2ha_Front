@@ -19,12 +19,12 @@ var AddPostComponent = /** @class */ (function () {
         this.msg = 'You must specify a description thats between 20 and 500 characters';
         this.categories = ['Product Form', 'Startup Form'];
         this.selectedCateogry = 'Category';
-        // filters= ['Food','Furniture','Handmade','Technology'];
-        // selectedFilter= 'Filter';
         this.categoryFlag = false;
         this.pic = null;
+        this.summaries = [];
     }
     AddPostComponent.prototype.ngOnInit = function () {
+        this.getCategory();
         this.PostForm = this.fb.group({
             StartupName: ['', [forms_1.Validators.required]],
             description: ['', [forms_1.Validators.required, forms_1.Validators.minLength(20)]],
@@ -36,7 +36,16 @@ var AddPostComponent = /** @class */ (function () {
             Price: [''],
             Posttype: [''],
             facebookpage: [''],
-            websitelink: ['']
+            websitelink: [''],
+            categoryId: [null, [forms_1.Validators.required]]
+        });
+    };
+    AddPostComponent.prototype.getCategory = function () {
+        var _this = this;
+        this.PostService.getAllCategory().subscribe(function (res) {
+            _this.summaries = res.categories;
+        }, function (err) {
+            console.log(err);
         });
     };
     AddPostComponent.prototype.setCategory = function (category) {
@@ -52,12 +61,6 @@ var AddPostComponent = /** @class */ (function () {
         category === 'Startup Form' ? this.PostForm.get('Posttype').setValidators([forms_1.Validators.required]) : this.PostForm.get('Posttype').clearValidators();
         this.PostForm.get('Posttype').updateValueAndValidity();
     };
-    // setFilter(filter: string) {
-    //   this.selectedFilter = filter;
-    //   this.PostForm.patchValue({
-    //     Category: filter
-    //   })
-    // }
     AddPostComponent.prototype.onFileChange = function (event) {
         if (event.target.files.length > 0) {
             var file = event.target.files[0];

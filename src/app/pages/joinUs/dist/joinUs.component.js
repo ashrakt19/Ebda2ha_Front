@@ -79,6 +79,7 @@ var JoinUsComponent = /** @class */ (function () {
             .subscribe(function (res) {
             _this.router.navigate(['/user-profile']);
             _this.toastr.success('You Logged In Successfully Hope You Doing Well with us!');
+            console.log(res);
         }, function (err) {
             _this.toastr.error(err);
         });

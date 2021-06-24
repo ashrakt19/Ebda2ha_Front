@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Post } from '../models/Post';
 import { Config } from '../models/Config';
-import { map } from 'rxjs/internal/operators/map';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,19 +24,32 @@ export class PostsService {
   createPost(post: any) {
     return this.http.post<Post>(this.SERVER_URL + '/post/', post)
   }
-// done
+  // done
   getAllPost(config: Config): Observable<any> {
     let qs = ''
     qs += (config.currentPage ? '?page=' + config.currentPage : '')
     qs += (config.itemsPerPage ? '&size=' + config.itemsPerPage : '')
     return this.http.get<any>(this.SERVER_URL + '/post' + qs);
   }
-  updatePost(id: string, post: Post) {
-    return this.http.put<Post[]>(this.SERVER_URL + '/posts/:postId', { id, post })
+
+  updatePost(post: Post, postId): Observable<any> {
+    return this.http.put<Post>(this.SERVER_URL + '/post/' + postId, post)
   }
 
+  deletePost(postId: string) {
+    return this.http.delete(this.SERVER_URL + '/post/' + postId)
+  }
+  filter(categoryId: string) {
+    return this.http.get(this.SERVER_URL + '/post/filter?categoryId=' + categoryId)
+
+  }
+  search(key: string) {
+    return this.http.get(this.SERVER_URL + '/post/search?key=' + key)
+  }
   findPost(postId: String): Observable<Post> {
-    return this.http.get<Post>(this.SERVER_URL + '/post/'+ postId)
+    return this.http.get<Post>(this.SERVER_URL + '/post/' + postId)
   }
-
+  getAllCategory() {
+    return this.http.get(this.SERVER_URL + '/category/')
+  }
 }

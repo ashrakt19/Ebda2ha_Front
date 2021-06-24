@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from "rxjs";
 import { User } from '../models/User';
 import { ChangePassword } from '../models/ChangePassword';
-
 @Injectable({ providedIn: 'root' })
 export class UserService {
   SERVER_URL = "http://localhost:3000";
@@ -23,9 +22,9 @@ export class UserService {
     return this.http.get<User>(this.SERVER_URL + '/profile')
   }
 
-  createAvatar(pic:string){
-    return this.http.post<User>(this.SERVER_URL+'profile/avatar',{pic})
 
+  createAvatar(pic, formData){
+    return this.http.post(this.SERVER_URL+'/profile/avatar',formData)
   }
   updateProfile(user:User){
     return this.http.put<User>(this.SERVER_URL + '/profile/updateProfile', user)
