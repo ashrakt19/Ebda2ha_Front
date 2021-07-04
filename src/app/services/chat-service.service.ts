@@ -26,6 +26,11 @@ export class ChatService {
     return this.http.get<any>(this.url+ '/profile/getUsers')
 
   }
+
+  getAllAdmins(){
+    return this.http.get<any>(this.url+ '/profile/admins')
+
+  }
   
   getmessage(receiverId){
 

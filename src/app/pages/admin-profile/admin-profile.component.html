@@ -1,0 +1,37 @@
+
+<body>
+   <app-navbar></app-navbar>
+  <div>
+    <input
+      type="text"
+      class="email"  
+      name="email" 
+      [(ngModel)]="email"
+      placeholder="Add New Admin "/>
+      <button
+      type="submit"
+      class="submit"
+      (click)="makeadmin()"
+  
+    >
+      make admin
+    </button>
+  </div>
+   <tbody *ngFor="let user of adminList" class="row1">
+    <tr>
+      <th scope="row">
+        {{user.firstName}} {{user.lastName}}
+      </th>
+      <td>
+        <img class="userPhoto" src="{{user.pic}}"/>
+      </td>
+      <td>
+        <button class="btn btn-sm btn-primary" routerLink="/view-profile/{{ user._id }}">{{user.firstName}} {{user.lastName}}</button>
+      </td>
+    
+    </tr>
+   </tbody>
+
+<app-footer></app-footer>
+
+</body>

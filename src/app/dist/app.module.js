@@ -45,6 +45,14 @@ var post_details_component_1 = require("./pages/post-details/post-details.compon
 var chat_component_1 = require("./pages/chat/chat.component");
 var comment_component_1 = require("./pages/comment/comment.component");
 var favourite_component_1 = require("./pages/favourite/favourite.component");
+var unapproved_posts_component_1 = require("./pages/unapproved-posts/unapproved-posts.component");
+var posts_admin_component_1 = require("./pages/posts-admin/posts-admin.component");
+var view_profile_component_1 = require("./pages/view-profile/view-profile.component");
+var my_jobs_component_1 = require("./pages/my-jobs/my-jobs.component");
+var job_details_component_1 = require("./pages/job-details/job-details.component");
+var admin_profile_component_1 = require("./pages/admin-profile/admin-profile.component");
+var add_job_component_1 = require("./pages/add-job/add-job.component");
+var all_jobs_component_1 = require("./pages/all-jobs/all-jobs.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -93,6 +101,15 @@ var AppModule = /** @class */ (function () {
                 chat_component_1.ChatComponent,
                 comment_component_1.CommentComponent,
                 favourite_component_1.FavouriteComponent,
+                dashboard_component_1.DashboardComponent,
+                unapproved_posts_component_1.UnapprovedPostsComponent,
+                posts_admin_component_1.PostsAdminComponent,
+                view_profile_component_1.ViewProfileComponent,
+                my_jobs_component_1.MyJobsComponent,
+                job_details_component_1.JobDetailsComponent,
+                admin_profile_component_1.AdminProfileComponent,
+                add_job_component_1.AddJobComponent,
+                all_jobs_component_1.AllJobsComponent
             ], providers: [
                 { provide: http_1.HTTP_INTERCEPTORS, useClass: jwt_interceptor_1.JwtInterceptor, multi: true },
                 { provide: http_1.HTTP_INTERCEPTORS, useClass: error_Interceptor_1.ErrorInterceptor, multi: true },

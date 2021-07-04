@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CommentComponent implements OnInit {
   post: Post;
+   postloaded: boolean = false;
 
   constructor(private formBuilder: FormBuilder,private userService:UserService , private commentService: CommentService,private toastr: ToastrService) { }
   ngOnInit(): void {

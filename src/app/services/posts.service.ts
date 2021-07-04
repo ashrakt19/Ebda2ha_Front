@@ -32,8 +32,20 @@ export class PostsService {
     return this.http.get<any>(this.SERVER_URL + '/post' + qs);
   }
 
+  counterPosts(){
+    return this.http.get(this.SERVER_URL+'/post/counter')
+  }
+
+  approvPost(postId: string) {
+    // debugger
+    return this.http.get(this.SERVER_URL + '/post/approve/' +postId)
+  }
+
   updatePost(post: Post, postId): Observable<any> {
     return this.http.put<Post>(this.SERVER_URL + '/post/' + postId, post)
+  }
+  getAllUnapprovedPost(){
+    return this.http.get(this.SERVER_URL+'/post/approve')
   }
 
   deletePost(postId: string) {
@@ -51,5 +63,12 @@ export class PostsService {
   }
   getAllCategory() {
     return this.http.get(this.SERVER_URL + '/category/')
+  }
+  deleteCategory(categoryId: string){
+    return this.http.delete(this.SERVER_URL+'/category/'+categoryId)
+  }
+  AddCategory(name:string){
+    return this.http.get(this.SERVER_URL+'/category/'+name)
+
   }
 }

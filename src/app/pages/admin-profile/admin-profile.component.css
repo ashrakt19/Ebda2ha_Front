@@ -1,0 +1,46 @@
+body{
+    background-color: #172b4d;
+}
+
+.userPhoto{
+    width: 150px;
+    height: 100px;
+    border-radius: 30%;
+}
+
+.row1{
+    background-color:white;
+    width: auto;
+    height: auto;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    justify-self:center;
+}
+
+td{
+    padding: 10px;
+}
+.row{
+    text-align: left;
+}
+.email{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    justify-self:center;
+    width: 500px;
+    border-radius: 4px;
+    border: none;
+    margin: auto;
+    margin-bottom: 10px;
+    display: inline;
+    margin-right: 5px;
+}
+.submit{
+    border: none;
+    border-radius: 20px;
+    color: white;
+    height: 30px;
+    background-color: rgb(85, 110, 177);
+}

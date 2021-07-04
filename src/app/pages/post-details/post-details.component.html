@@ -10,21 +10,23 @@
           <div class="col-4 text-right">
             <button
               class="btn btn-warning"
-              *ngIf="user"
+              *ngIf="post.createdBy._id === user._id"
               (click)="onEditPost()"
             >
               Edit Post
             </button>
-            <button class="btn btn-danger" *ngIf="user"
+            <button class="btn btn-danger" *ngIf="post.createdBy._id === user._id"
             (click)="onDeletePost()">
               Delete Post
             </button>
-            <button
+            <a
+            routerLink="/view-profile/{{ post.createdBy._id }}"
+            
               class="btn btn-warning"
-              *ngIf="!user"
+              *ngIf="post.createdBy._id !== user._id"
             >
               Connect User
-            </button>
+          </a>
           </div>
         </div>
       </div>

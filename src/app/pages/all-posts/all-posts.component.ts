@@ -22,6 +22,7 @@ export class AllPostsComponent implements OnInit {
     currentPage: 1,
     totalItems: 100,
   }
+  postloaded: boolean = false;
 
   ngOnInit() {
     this.getposts();
@@ -59,6 +60,7 @@ export class AllPostsComponent implements OnInit {
 
   getposts() {
     this.postService.getAllPost(this.config).subscribe(res => {
+      this.postloaded= true;
       // console.log(res)
       this.posts = res.posts
     })

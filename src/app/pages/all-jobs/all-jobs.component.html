@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<div class="bg-default">
+  <section class="page-section">
+    <div class="container">
+      <div class="text-center">
+        <div class="row">
+          <div class="col-sm">
+            <p class="text-white text-left">
+              Welcome to all Jobs's posts, here you can find all jobs.
+            </p>
+          </div>
+          <div class="col-sm">
+            <button
+              class="btn btn-warning text-white mt-2"
+              (click)="openAdd()"
+            >
+              Add New Job
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="col-xl-4 col-lg-6"
+          *ngFor="let job of jobs"
+        >
+          <div class="card-group">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="../../../assets/aboutus.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h1 class="card-title">{{ job.JobName }}</h1>
+                <h3 class="card-text">Posted By: {{ job.creator.firstName }}</h3>
+                <h3 class="card-text">Description: {{ job.JobDescription }}</h3>
+                <h3 class="card-text">Job Salary: {{ job.Salary }}</h3>
+                <h3 class="card-text">Phone Number: {{ job.phone }}</h3>
+                <h3 class="card-text">
+                  Facebook Page: {{ job.facebookpage }}
+                </h3>
+                <h3 class="card-text">
+                  Website Link: {{ job.websitelink }}
+                </h3>
+                <h3 class="card-text">Location: {{ job.addressLine }}</h3>
+                <button
+                  class="btn btn-default text-center"
+                  (click)="openAddComment()"
+                >
+                  Apply
+                </button>
+                <a
+                routerLink="/chat/{{ job.creator._id }}"
+                
+                  class="btn btn-default"
+                >
+                Message User
+              </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="bg-default">
+  <app-footer></app-footer>
+</div>

@@ -37,6 +37,14 @@ import { PostDetailsComponent } from './pages/post-details/post-details.componen
 import { ChatComponent } from './pages/chat/chat.component';
 import { CommentComponent } from './pages/comment/comment.component';
 import { FavouriteComponent } from './pages/favourite/favourite.component';
+import { UnapprovedPostsComponent } from './pages/unapproved-posts/unapproved-posts.component';
+import { PostsAdminComponent } from './pages/posts-admin/posts-admin.component';
+import { ViewProfileComponent } from './pages/view-profile/view-profile.component';
+import { MyJobsComponent } from './pages/my-jobs/my-jobs.component';
+import { JobDetailsComponent } from './pages/job-details/job-details.component';
+import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
+import { AddJobComponent } from './pages/add-job/add-job.component';
+import { AllJobsComponent } from './pages/all-jobs/all-jobs.component';
 
 @NgModule({
   imports: [
@@ -82,6 +90,16 @@ import { FavouriteComponent } from './pages/favourite/favourite.component';
     ChatComponent,
     CommentComponent,
     FavouriteComponent,
+    DashboardComponent,
+    UnapprovedPostsComponent,
+    PostsAdminComponent,
+    ViewProfileComponent,
+    MyJobsComponent,
+    JobDetailsComponent,
+    AdminProfileComponent,
+    AddJobComponent,
+    AllJobsComponent
+
       ], providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

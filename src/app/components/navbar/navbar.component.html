@@ -121,12 +121,20 @@
             </a>
             <a
               routerLinkActive="active"
-              [routerLink]="['/add-post']"
+              [routerLink]="['/all-jobs']"
               class="dropdown-item"
             >
               <i class="ni ni-calendar-grid-58"></i>
-              <span>Projects</span>
+              <span>Jobs</span>
             </a>
+            <a
+            routerLinkActive="active"
+            [routerLink]="['/dashboard']"
+            class="dropdown-item"
+          >
+            <i class="ni ni-calendar-grid-58"></i>
+            <span>Projects</span>
+          </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="onLogout()">
               <i class="ni ni-user-run"></i>

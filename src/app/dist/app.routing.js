@@ -14,6 +14,14 @@ var forgetpassword_component_1 = require("./pages/forgetpassword/forgetpassword.
 var add_post_component_1 = require("./pages/add-post/add-post.component");
 var post_details_component_1 = require("./pages/post-details/post-details.component");
 var chat_component_1 = require("./pages/chat/chat.component");
+var posts_admin_component_1 = require("./pages/posts-admin/posts-admin.component");
+var unapproved_posts_component_1 = require("./pages/unapproved-posts/unapproved-posts.component");
+var view_profile_component_1 = require("./pages/view-profile/view-profile.component");
+var admin_profile_component_1 = require("./pages/admin-profile/admin-profile.component");
+var add_job_component_1 = require("./pages/add-job/add-job.component");
+var my_jobs_component_1 = require("./pages/my-jobs/my-jobs.component");
+var all_jobs_component_1 = require("./pages/all-jobs/all-jobs.component");
+var job_details_component_1 = require("./pages/job-details/job-details.component");
 var appRoutes = [
     {
         path: '',
@@ -23,6 +31,22 @@ var appRoutes = [
         path: 'dashboard',
         component: dashboard_component_1.DashboardComponent,
         canActivate: [auth_guard_1.AuthGuard]
+    },
+    {
+        path: 'posts-admin',
+        component: posts_admin_component_1.PostsAdminComponent
+    },
+    {
+        path: 'unapproved-posts',
+        component: unapproved_posts_component_1.UnapprovedPostsComponent
+    },
+    {
+        path: 'view-profile/:_id',
+        component: view_profile_component_1.ViewProfileComponent
+    },
+    {
+        path: 'admin-profile',
+        component: admin_profile_component_1.AdminProfileComponent
     },
     {
         path: 'joinUs',
@@ -35,9 +59,25 @@ var appRoutes = [
         path: 'all-posts',
         component: all_posts_component_1.AllPostsComponent,
         canActivate: [auth_guard_1.AuthGuard]
-    }, {
+    },
+    {
+        path: 'all-jobs',
+        component: all_jobs_component_1.AllJobsComponent,
+        canActivate: [auth_guard_1.AuthGuard]
+    },
+    {
         path: 'my-posts',
         component: my_posts_component_1.MyPostsComponent,
+        canActivate: [auth_guard_1.AuthGuard]
+    },
+    {
+        path: 'my-jobs',
+        component: my_jobs_component_1.MyJobsComponent,
+        canActivate: [auth_guard_1.AuthGuard]
+    },
+    {
+        path: 'add-job',
+        component: add_job_component_1.AddJobComponent,
         canActivate: [auth_guard_1.AuthGuard]
     },
     {
@@ -59,7 +99,11 @@ var appRoutes = [
         component: post_details_component_1.PostDetailsComponent
     },
     {
-        path: 'chat/:useridd',
+        path: 'job-details/:jobId',
+        component: job_details_component_1.JobDetailsComponent
+    },
+    {
+        path: 'chat/:_id',
         component: chat_component_1.ChatComponent
     },
     // otherwise redirect to home

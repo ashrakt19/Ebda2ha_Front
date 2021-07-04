@@ -12,6 +12,14 @@ import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.c
 import { AddPostComponent } from './pages/add-post/add-post.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import { PostsAdminComponent } from './pages/posts-admin/posts-admin.component';
+import { UnapprovedPostsComponent } from './pages/unapproved-posts/unapproved-posts.component';
+import { ViewProfileComponent } from './pages/view-profile/view-profile.component';
+import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
+import { AddJobComponent } from './pages/add-job/add-job.component';
+import { MyJobsComponent } from './pages/my-jobs/my-jobs.component';
+import { AllJobsComponent } from './pages/all-jobs/all-jobs.component';
+import { JobDetailsComponent } from './pages/job-details/job-details.component';
 
 const appRoutes: Routes = [
     {
@@ -25,6 +33,22 @@ const appRoutes: Routes = [
         //   data: { roles: [Role.Admin] } 
     },
     {
+        path: 'posts-admin',
+        component: PostsAdminComponent
+    },
+    {
+        path: 'unapproved-posts',
+        component: UnapprovedPostsComponent
+    },
+    {
+        path: 'view-profile/:_id',
+        component: ViewProfileComponent
+    },
+    {
+        path: 'admin-profile',
+        component: AdminProfileComponent
+    },
+    {
         path: 'joinUs',
         component: JoinUsComponent
     },
@@ -35,9 +59,25 @@ const appRoutes: Routes = [
         path: 'all-posts',
         component: AllPostsComponent,
         canActivate: [AuthGuard]
-    }, {
+    },
+    {
+        path: 'all-jobs',
+        component: AllJobsComponent,
+        canActivate: [AuthGuard]
+    },
+     {
         path: 'my-posts',
         component: MyPostsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'my-jobs',
+        component: MyJobsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'add-job',
+        component: AddJobComponent,
         canActivate: [AuthGuard]
     },
     {
@@ -59,7 +99,11 @@ const appRoutes: Routes = [
         component: PostDetailsComponent,
     },
     {
-        path: 'chat/:useridd',
+        path: 'job-details/:jobId',
+        component: JobDetailsComponent,
+    },
+    {
+        path: 'chat/:_id',
         component: ChatComponent,
     },
 

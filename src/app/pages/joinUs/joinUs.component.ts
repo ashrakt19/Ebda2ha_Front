@@ -127,7 +127,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   }
   onVerify() {
     this.auth.verifyEmail(this.code).subscribe(res => {
-      this.router.navigate(['/user-profile']);
+      this.toastr.success('You Verfied your account successfully, Please login')
     },  err => {
       this.toastr.error(err);
 

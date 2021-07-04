@@ -1,0 +1,236 @@
+<div class="card bg-secondary shadow">
+  <div class="card-header bg-white border-0">
+    <div class="row align-items-center">
+      <div class="col-8">
+        <h3 class="mb-0">Add New Job</h3>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div
+        class="
+          col-lg-6
+          d-flex
+          justify-content-end
+          align-items-center
+          text-muted
+        "
+      >
+      </div>
+    </div>
+    <form novalidate [formGroup]="JobForm" class="mt-4">
+      <div class="animated fadeIn">
+        <div class="pl-lg-4">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-StartupName"
+                >Job Name</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (JobForm.get('JobName').touched ||
+                    JobForm.get('JobName').dirty) &&
+                    !JobForm.get('JobName').valid
+                }"
+              >
+                <input
+                  type="text"
+                  formControlName="JobName"
+                  class="form-control form-control-alternative"
+                  placeholder="Job Name"
+                  [ngClass]="{
+                    'is-invalid':
+                      (JobForm.get('JobName').touched ||
+                      JobForm.get('JobName').dirty) &&
+                      !JobForm.get('JobName').valid
+                  }"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-Productname"
+                >Job Describtion</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (JobForm.get('JobDescription').touched ||
+                    JobForm.get('JobDescription').dirty) &&
+                    !JobForm.get('JobDescription').valid
+                }"
+              >
+                <input
+                  type="text"
+                  id="input-JobDescribtion"
+                  formControlName="JobDescription"
+                  name="JobDescribtion"
+                  class="form-control form-control-alternative"
+                  placeholder="Job Describtion"
+                  [ngClass]="{
+                    'is-invalid':
+                      (JobForm.get('JobDescription').touched ||
+                      JobForm.get('JobDescription').dirty) &&
+                      !JobForm.get('JobDescription').valid
+                  }"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-Price">Salary</label>
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (JobForm.get('Salary').touched ||
+                    JobForm.get('Salary').dirty) &&
+                    !JobForm.get('Salary').valid
+                }"
+              >
+                <input
+                  type="number"
+                  id="input-Salary"
+                  formControlName="Salary"
+                  name="Salary"
+                  class="form-control form-control-alternative"
+                  placeholder="Salary"
+                  [ngClass]="{
+                    'is-invalid':
+                      (JobForm.get('Salary').touched ||
+                      JobForm.get('Salary').dirty) &&
+                      !JobForm.get('Salary').valid
+                  }"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-phone">Phone</label>
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (JobForm.get('phone').touched ||
+                    JobForm.get('phone').dirty) &&
+                    !JobForm.get('phone').valid
+                }"
+              >
+                <input
+                  type="number"
+                  formControlName="phone"
+                  class="form-control form-control-alternative"
+                  placeholder="Phone Number"
+                  [ngClass]="{
+                    'is-invalid':
+                      (JobForm.get('phone').touched ||
+                      JobForm.get('phone').dirty) &&
+                      !JobForm.get('phone').valid
+                  }"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-facebookpage">
+                Facebook Page</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (JobForm.get('facebookpage').touched ||
+                    JobForm.get('facebookpage').dirty) &&
+                    !JobForm.get('facebookpage').valid
+                }"
+              >
+                <input
+                  type="text"
+                  formControlName="facebookpage"
+                  class="form-control form-control-alternative"
+                  placeholder="Facebook Page"
+                  [ngClass]="{
+                    'is-invalid':
+                      (JobForm.get('facebookpage').touched ||
+                      JobForm.get('facebookpage').dirty) &&
+                      !JobForm.get('facebookpage').valid
+                  }"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-websitelink">
+                WebSite Link</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (JobForm.get('websitelink').touched ||
+                    JobForm.get('websitelink').dirty) &&
+                    !JobForm.get('websitelink').valid
+                }"
+              >
+                <input
+                  type="text"
+                  formControlName="websitelink"
+                  class="form-control form-control-alternative"
+                  placeholder=" Website Link"
+                  [ngClass]="{
+                    'is-invalid':
+                      (JobForm.get('websitelink').touched ||
+                      JobForm.get('websitelink').dirty) &&
+                      !JobForm.get('websitelink').valid
+                  }"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label class="form-control-label" for="input-address"
+                >Detailed Address</label
+              >
+              <div
+                class="form-group"
+                [ngClass]="{
+                  'has-danger':
+                    (JobForm.get('addressLine').touched ||
+                    JobForm.get('addressLine').dirty) &&
+                    !JobForm.get('addressLine').valid
+                }"
+              >
+                <input
+                  type="text"
+                  id="input-address"
+                  name="addressLine"
+                  formControlName="addressLine"
+                  class="form-control form-control-alternative"
+                  placeholder="1st,In Front Of The Station"
+                  [ngClass]="{
+                    'is-invalid':
+                      (JobForm.get('addressLine').touched ||
+                      JobForm.get('addressLine').dirty) &&
+                      !JobForm.get('addressLine').valid
+                  }"
+                />
+              </div>
+            </div>
+            </div>
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-warning float-right"
+          (click)="onSubmit()"
+        >
+          Submit Job
+        </button>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>

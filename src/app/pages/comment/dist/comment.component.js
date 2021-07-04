@@ -15,6 +15,7 @@ var CommentComponent = /** @class */ (function () {
         this.userService = userService;
         this.commentService = commentService;
         this.toastr = toastr;
+        this.postloaded = false;
         this.user = this.userService.currentUserValue;
         this.userId = this.user.idd;
     }

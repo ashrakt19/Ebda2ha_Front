@@ -1,0 +1,136 @@
+<app-navbar></app-navbar>
+<section class="page-section bg-default">
+  <div class="container" *ngIf="jobloaded==true">
+    <div class="card bg-secondary shadow">
+      <div class="card-header bg-white border-0">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h3 class="mb-0">Posted By:{{job.createdBy.firstName}} {{job.createdBy.lastName}} </h3>
+          </div>
+          <div class="col-4 text-right">
+            <button
+              class="btn btn-warning"
+              *ngIf="user"
+              (click)="onEditJob()"
+            >
+              Edit Job
+            </button>
+            <button class="btn btn-danger" *ngIf="user"
+            (click)="onDeleteJob()">
+              Delete Job
+            </button>
+            <button
+              class="btn btn-warning"
+              *ngIf="!user"
+            >
+              Connect User
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-StartupName"
+            >Job Name</label
+          >
+          <input
+            type="text"
+            id="input-JobName"
+           [(ngModel)]="job.JobName"
+            name="JobName"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-description"
+            >Description</label
+          >
+          <input
+            type="text"
+            id="input-description"
+            [(ngModel)]="job.description"
+            name="description"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-Price"
+            >Salary</label
+          >
+          <input
+            type="text"
+            id="input-Salary"
+            [(ngModel)]="job.Salary"
+            name="Salary"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-Phone"
+            >Phone Number</label
+          >
+          <input
+            type="text"
+            id="input-Phone"
+            [(ngModel)]="job.phone"
+            name="Phone"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-addressLine"
+            >Address</label
+          >
+          <input
+            type="text"
+            id="input-addressLine"
+            [(ngModel)]="job.addressLine"
+            name="addressLine"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-facebookpage"
+            >Facebook Page </label
+          >
+          <input
+            type="text"
+            id="input-facebookpage"
+            [(ngModel)]="job.facebookpage"
+            name="facebookpage"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="input-websitelink"
+            >Website Link</label
+          >
+          <input
+            type="text"
+            id="input-websitelink"
+            [(ngModel)]="job.websitelink"
+            name="websitelink"
+            class="form-control form-control-alternative"
+          />
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+<div class="bg-default">
+  <app-footer></app-footer>
+</div>

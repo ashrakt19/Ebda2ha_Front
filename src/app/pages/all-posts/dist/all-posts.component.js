@@ -20,6 +20,7 @@ var AllPostsComponent = /** @class */ (function () {
             currentPage: 1,
             totalItems: 100
         };
+        this.postloaded = false;
         this.summaries = [];
     }
     AllPostsComponent.prototype.ngOnInit = function () {
@@ -49,6 +50,7 @@ var AllPostsComponent = /** @class */ (function () {
     AllPostsComponent.prototype.getposts = function () {
         var _this = this;
         this.postService.getAllPost(this.config).subscribe(function (res) {
+            _this.postloaded = true;
             // console.log(res)
             _this.posts = res.posts;
         });
